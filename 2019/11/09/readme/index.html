@@ -15,15 +15,14 @@
 
 
 
-<meta name="description" content="题面​    求S到T的路径最大边比最小边的最小值。——可以重复走呐">
-<meta name="keywords" content="BZOJ,并查集">
+<meta name="description" content="没学上了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BZOJ1050 [HAOI2006]旅行comf">
-<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;09&#x2F;BZOJ1050%20[HAOI2006]%E6%97%85%E8%A1%8Ccomf&#x2F;index.html">
+<meta property="og:title" content="readme">
+<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;09&#x2F;readme&#x2F;index.html">
 <meta property="og:site_name" content="Wzp Ak King">
-<meta property="og:description" content="题面​    求S到T的路径最大边比最小边的最小值。——可以重复走呐">
+<meta property="og:description" content="没学上了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-28T09:18:56.719Z">
+<meta property="og:updated_time" content="2019-11-09T10:16:52.630Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -56,7 +55,7 @@
 <link href="https://cdnjs.loli.net/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>BZOJ1050 [HAOI2006]旅行comf | Wzp Ak King</title>
+<title>readme | Wzp Ak King</title>
 
 <script src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -216,11 +215,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-BZOJ1050 [HAOI2006]旅行comf" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-readme" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/11/09/BZOJ1050%20%5BHAOI2006%5D%E6%97%85%E8%A1%8Ccomf/" class="article-date">
-      <time datetime="2019-11-09T08:46:29.860Z" itemprop="datePublished">2019-11-09</time>
+      <a href="/2019/11/09/readme/" class="article-date">
+      <time datetime="2019-11-09T10:08:28.360Z" itemprop="datePublished">2019-11-09</time>
 </a>
 
 
@@ -235,7 +234,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      BZOJ1050 [HAOI2006]旅行comf
+      readme
     </h1>
   
 
@@ -245,10 +244,6 @@
         
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BZOJ/" rel="tag">BZOJ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -256,12 +251,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h4><p>​    求S到T的路径最大边比最小边的最小值。——可以重复走呐</p>
+        <p>没学上了。</p>
 <a id="more"></a>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>​    排序之后，考虑暴力枚举最小边，最大边直接加进去，到S和T联通了，那么就update答案。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">namespace</span> IO&#123;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> getch getchar</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;<span class="keyword">int</span> T = <span class="number">0</span>,f = <span class="number">1</span>;<span class="keyword">char</span> c = getch();<span class="keyword">while</span> ((c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)&amp;&amp;c!=<span class="string">'-'</span>) c=getch();<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>,c=getch();<span class="keyword">while</span> (c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)&#123;T=((T&lt;&lt;<span class="number">1</span>)+(T&lt;&lt;<span class="number">3</span>))+c<span class="number">-48</span>;c=getch();&#125;<span class="keyword">return</span> T*f;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">if</span>(x &lt; <span class="number">0</span>) <span class="built_in">putchar</span>(<span class="string">'0'</span>),x = -x;<span class="keyword">if</span> (x&gt;=<span class="number">10</span>) <span class="built_in">write</span>(x / <span class="number">10</span>);<span class="built_in">putchar</span>((x % <span class="number">10</span>)+<span class="string">'0'</span>);&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pc putchar</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> IO;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">505</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">5005</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x,y,v;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Edge &amp;a) <span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> v &lt; a.v;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;edge[maxm];</span><br><span class="line"><span class="keyword">int</span> Max,Min,n,m,fa[maxn],rank[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">return</span> fa[x]==x?x:fa[x]=<span class="built_in">find</span>(fa[x]);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UNION</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (rank[x] &gt; rank[y]) swap(x,y);</span><br><span class="line">	fa[x] = y;</span><br><span class="line">	<span class="keyword">if</span> (rank[x]==rank[y]) rank[y]++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;<span class="keyword">return</span> !b?a:gcd(b,a%b);&#125;</span><br><span class="line"><span class="keyword">int</span> s,t;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	n = <span class="built_in">read</span>(); m = <span class="built_in">read</span>();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">		edge[i].x = <span class="built_in">read</span>(),edge[i].y = <span class="built_in">read</span>(),edge[i].v = <span class="built_in">read</span>();</span><br><span class="line">	s=<span class="built_in">read</span>(),t=<span class="built_in">read</span>();</span><br><span class="line">	sort(edge+<span class="number">1</span>,edge+<span class="number">1</span>+m);</span><br><span class="line">	Max = Min = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++) fa[j] = j;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=i;j&lt;=m;j++)&#123;</span><br><span class="line">			<span class="keyword">int</span> x = <span class="built_in">find</span>(edge[j].x),y = <span class="built_in">find</span>(edge[j].y);</span><br><span class="line">			<span class="keyword">if</span> (x==y) <span class="keyword">continue</span>;</span><br><span class="line">			UNION(x,y);</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">find</span>(s)==<span class="built_in">find</span>(t))&#123;</span><br><span class="line">				<span class="keyword">if</span> (Max==<span class="number">-1</span> || (<span class="keyword">double</span>)edge[j].v / edge[i].v &lt; (<span class="keyword">double</span>)Max / Min)&#123;</span><br><span class="line">					Max = edge[j].v;</span><br><span class="line">					Min = edge[i].v;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (Max==<span class="number">-1</span>) <span class="built_in">puts</span>(<span class="string">"IMPOSSIBLE"</span>); <span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> g = gcd(Max,Min);</span><br><span class="line">		<span class="keyword">if</span> (Min == g) <span class="built_in">write</span>(Max/g); <span class="keyword">else</span></span><br><span class="line">			<span class="built_in">write</span>(Max / g),pc(<span class="string">'/'</span>),<span class="built_in">write</span>(Min / g);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>OJ账号</p>
+<p><a href="https://www.luogu.org/space/show?uid=21182" target="_blank" rel="noopener">luogu</a></p>
+<p><a href="https://www.lydsy.com/JudgeOnline/userinfo.php?user=hurry" target="_blank" rel="noopener">Lydsy</a></p>
+<p><a href="http://codeforces.com/profile/wzporz" target="_blank" rel="noopener">codeforces1</a></p>
+<p><a href="http://codeforces.com/profile/emoairx" target="_blank" rel="noopener">codeforces2</a></p>
+<p><a href="http://atcoder.jp/user/wzporz" target="_blank" rel="noopener">Atcoder</a></p>
+<p><a href="https://www.cometoj.com/user-home?username=wzporz" target="_blank" rel="noopener">cometOJ</a></p>
 
       
     </div>
@@ -270,13 +269,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/11/09/BZOJ1050%20%5BHAOI2006%5D%E6%97%85%E8%A1%8Ccomf/">BZOJ1050 [HAOI2006]旅行comf</a></p>
+        <p><span>本文标题:</span><a href="/2019/11/09/readme/">readme</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">wzporz</a></p>
-        <p><span>发布时间:</span>2019-11-09, 16:46:29</p>
-        <p><span>最后更新:</span>2017-12-28, 17:18:56</p>
+        <p><span>发布时间:</span>2019-11-09, 18:08:28</p>
+        <p><span>最后更新:</span>2019-11-09, 18:16:52</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/11/09/BZOJ1050%20%5BHAOI2006%5D%E6%97%85%E8%A1%8Ccomf/" title="BZOJ1050 [HAOI2006]旅行comf">http://emoairx.top/2019/11/09/BZOJ1050%20[HAOI2006]%E6%97%85%E8%A1%8Ccomf/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/09/BZOJ1050%20[HAOI2006]%E6%97%85%E8%A1%8Ccomf/　　作者: wzporz" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/09/readme/" title="readme">http://emoairx.top/2019/11/09/readme/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/09/readme/　　作者: wzporz" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -288,16 +287,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/11/09/BZOJ1061%20%5BNoi2008%5D%E5%BF%97%E6%84%BF%E8%80%85%E6%8B%9B%E5%8B%9F/">
-                    BZOJ1061 [Noi2008]志愿者招募
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/11/09/BZOj1049%20%5BHAOI2006%5D%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97/">
-                    BZOj1049 [HAOI2006]数字序列
+                <a href="/2019/11/09/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/">
+                    ZJOI2019退役录（简略OI回忆录？）
                 </a>
             </div>
         
@@ -309,7 +302,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#题面"><span class="toc-number">1.</span> <span class="toc-text">题面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题解"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li></ol>
+            
         
     </div>
     <style>
@@ -345,7 +338,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"BZOJ1050 [HAOI2006]旅行comf　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"readme　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -387,15 +380,13 @@ new Valine({
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/09/BZOJ1061%20%5BNoi2008%5D%E5%BF%97%E6%84%BF%E8%80%85%E6%8B%9B%E5%8B%9F/" title="上一篇: BZOJ1061 [Noi2008]志愿者招募">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/11/09/BZOj1049%20%5BHAOI2006%5D%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97/" title="下一篇: BZOj1049 [HAOI2006]数字序列">
+            <a href="/2019/11/09/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/" title="下一篇: ZJOI2019退役录（简略OI回忆录？）">
                 <i class="fa fa-angle-right"></i>
             </a>
         
