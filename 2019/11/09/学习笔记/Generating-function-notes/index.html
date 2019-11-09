@@ -15,15 +15,15 @@
 
 
 
-<meta name="description" content="题面​    http:&#x2F;&#x2F;www.lydsy.com&#x2F;JudgeOnline&#x2F;problem.php?id=3438">
-<meta name="keywords" content="BZOJ,网络流">
+<meta name="description" content="挖坑不填 等有空了大概会填的吧">
+<meta name="keywords" content="生成函数,多项式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BZOJ3438 小M的作物">
-<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;09&#x2F;BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9&#x2F;index.html">
+<meta property="og:title" content="生成函数学习笔记">
+<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;09&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;Generating-function-notes&#x2F;index.html">
 <meta property="og:site_name" content="Wzp Ak King">
-<meta property="og:description" content="题面​    http:&#x2F;&#x2F;www.lydsy.com&#x2F;JudgeOnline&#x2F;problem.php?id=3438">
+<meta property="og:description" content="挖坑不填 等有空了大概会填的吧">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-03T08:37:14.382Z">
+<meta property="og:updated_time" content="2019-11-09T11:12:43.852Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -56,7 +56,7 @@
 <link href="https://cdnjs.loli.net/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>BZOJ3438 小M的作物 | Wzp Ak King</title>
+<title>生成函数学习笔记 | Wzp Ak King</title>
 
 <script src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -216,11 +216,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-BZOJ3438 小M的作物" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-学习笔记/Generating-function-notes" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/11/09/BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9/" class="article-date">
-      <time datetime="2019-11-09T08:46:29.898Z" itemprop="datePublished">2019-11-09</time>
+      <a href="/2019/11/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/" class="article-date">
+      <time datetime="2019-11-09T11:05:31.708Z" itemprop="datePublished">2019-11-09</time>
 </a>
 
 
@@ -235,7 +235,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      BZOJ3438 小M的作物
+      生成函数学习笔记
     </h1>
   
 
@@ -246,7 +246,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BZOJ/" rel="tag">BZOJ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag">网络流</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag">多项式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/" rel="tag">生成函数</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -256,22 +256,48 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h4><p>​    <a href="http://www.lydsy.com/JudgeOnline/problem.php?id=3438" target="_blank" rel="noopener">http://www.lydsy.com/JudgeOnline/problem.php?id=3438</a></p>
+        <p>挖坑不填</p>
+<p>等有空了大概会填的吧</p>
 <a id="more"></a>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>​    先贴一个<strong>错误</strong>的做法，也是我一开始想到的做法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">假设与S相连表示在A集合，与T相连表示在B集 </span><br><span class="line">一开始得到所有点的贡献(sum)</span><br><span class="line">S向所有作物连一条容量为Ai的边</span><br><span class="line">所有作物向T连一条容量为Bi的边</span><br><span class="line">PS：在不考虑组合的情况下，sum-最小割已经是答案了。</span><br><span class="line">对于一种组合X</span><br><span class="line">S向X连一条容量为c1的边，X向T连一条容量为C2的边</span><br><span class="line">对于X相关的所有作物，互相连一条容量为inf的边</span><br><span class="line">对于所有组合，只有某一边全部被割去才能计算，所以也可以得到结果。</span><br><span class="line">这样就满足了组合的需求。</span><br></pre></td></tr></table></figure>
-
-<p>​    但是事实上，我们无意间强制要求两个本不不相干的点在同一个割集了。</p>
-<p>数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">1 7 </span><br><span class="line">9 2 </span><br><span class="line">1</span><br><span class="line">2 5 2 1 2</span><br></pre></td></tr></table></figure>
-
-<p>![反例](BZOJ3438 小M的作物\反例.png)    注意红色的边，它的边权是$inf$，那么强制X和Y在同一个割集了。</p>
-<p>​    所以要改变思路，不能用一个组合</p>
-<p>​    我们可以把组合拆成两个点，S向组合1连一条c1的边，组合1向对应种子连边(inf)，对应种子向组合2连边(inf)，组合2向点T连边。</p>
-<p>​    这样就不会导致强制同一个割集了。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Hello Wolrd</span></span><br><span class="line"><span class="comment">//There is Special Pig Jiong in the world.</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bitset&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pc putchar</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;<span class="keyword">int</span> x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> c=gc();<span class="keyword">for</span>(;c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>;c=gc())<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;<span class="keyword">for</span>(;c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>;c=gc())x=x*<span class="number">10</span>+c<span class="number">-48</span>;<span class="keyword">return</span> x*f;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="keyword">if</span>(x &lt; <span class="number">0</span>) <span class="built_in">putchar</span>(<span class="string">'-'</span>),x = -x;<span class="keyword">if</span> (x&gt;=<span class="number">10</span>) <span class="built_in">write</span>(x / <span class="number">10</span>);<span class="built_in">putchar</span>((x % <span class="number">10</span>)+<span class="string">'0'</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">writeln</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">puts</span>(<span class="string">""</span>);&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> oo = <span class="number">0x3f3f3f3f</span>;<span class="keyword">const</span> <span class="keyword">int</span> inf = oo;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(x,v) memset(x,v,sizeof(x))</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(register int i=(a);i&lt;(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> file(x) &#123;freopen(#x<span class="meta-string">".in"</span>,<span class="meta-string">"r"</span>,stdin);freopen(#x<span class="meta-string">".out"</span>,<span class="meta-string">"w"</span>,stdout);&#125;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 3005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 1009*1009*2+1005+1005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> T n+2*m+1</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt,cap;</span><br><span class="line">	Edge() &#123;&#125;</span><br><span class="line">	Edge(<span class="keyword">int</span> to,<span class="keyword">int</span> nxt,<span class="keyword">int</span> cap):to(to),nxt(nxt),cap(cap)&#123;&#125;</span><br><span class="line">&#125;edge[M*<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> first[N],cur[N],q[N],dis[N],nume,n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Addedge</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c,<span class="keyword">int</span> d = <span class="number">0</span>)</span></span>&#123;</span><br><span class="line"><span class="comment">//	printf("%d-&gt;%d:%d\n",a,b,c);</span></span><br><span class="line">	edge[nume] = Edge(b,first[a],c);first[a] = nume++;</span><br><span class="line">	edge[nume] = Edge(a,first[b],d);first[b] = nume++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> front,rear;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">bfs</span><span class="params">()</span></span>&#123;</span><br><span class="line">	mem(dis,<span class="number">-1</span>);</span><br><span class="line">	front = rear = <span class="number">0</span>;</span><br><span class="line">	q[rear++] = T;</span><br><span class="line">	dis[T] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(front&lt;rear)&#123;</span><br><span class="line">		<span class="keyword">int</span> u = q[front++];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> e=first[u];~e;e=edge[e].nxt)&#123;</span><br><span class="line">			<span class="keyword">int</span> v = edge[e].to;</span><br><span class="line">			<span class="keyword">if</span> (edge[e^<span class="number">1</span>].cap &amp;&amp; dis[v]==<span class="number">-1</span>)</span><br><span class="line">				dis[v] = dis[u] + <span class="number">1</span>,q[rear++] = v;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dis[S]!=<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> flow)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(u==T)<span class="keyword">return</span> flow;</span><br><span class="line">	<span class="keyword">int</span> used = <span class="number">0</span>,d;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> &amp;e=cur[u];~e;e=edge[e].nxt)&#123;</span><br><span class="line">		<span class="keyword">int</span> v = edge[e].to;</span><br><span class="line">		<span class="keyword">if</span>(edge[e].cap &amp;&amp; dis[v]==dis[u]<span class="number">-1</span> &amp;&amp; (d = dfs(v,<span class="built_in">min</span>(flow-used,edge[e].cap))))</span><br><span class="line">			edge[e].cap-=d,edge[e^<span class="number">1</span>].cap += d,used+=d;</span><br><span class="line">		<span class="keyword">if</span> (used == flow) <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dinic</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>,flow;</span><br><span class="line">	<span class="keyword">while</span>(bfs())&#123;</span><br><span class="line">		rep(i,S,T+<span class="number">1</span>) cur[i]=first[i];</span><br><span class="line">		<span class="keyword">while</span>(flow=dfs(S,inf))ans+=flow;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1005</span>],b[<span class="number">1005</span>],ans;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"1.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"AC.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>); </span><br><span class="line">	ans = <span class="number">0</span>;</span><br><span class="line">	n = <span class="built_in">read</span>();</span><br><span class="line">	rep(i,<span class="number">0</span>,n)a[i]=<span class="built_in">read</span>(),ans+=a[i];</span><br><span class="line">	rep(i,<span class="number">0</span>,n)b[i]=<span class="built_in">read</span>(),ans+=b[i];</span><br><span class="line">	m = <span class="built_in">read</span>();</span><br><span class="line">	mem(first,<span class="number">-1</span>);nume = <span class="number">0</span>;</span><br><span class="line">	rep(i,<span class="number">0</span>,n)Addedge(S,i+<span class="number">1</span>,a[i]);</span><br><span class="line">	rep(i,<span class="number">0</span>,n)Addedge(i+<span class="number">1</span>,T,b[i]);</span><br><span class="line">	rep(i,<span class="number">1</span>,m+<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> k = <span class="built_in">read</span>();</span><br><span class="line">		<span class="keyword">int</span> c1=<span class="built_in">read</span>(),c2=<span class="built_in">read</span>();</span><br><span class="line">		ans+=c1+c2;</span><br><span class="line">		Addedge(S,n+i*<span class="number">2</span>,c1);</span><br><span class="line">		Addedge(n+i*<span class="number">2</span><span class="number">-1</span>,T,c2);</span><br><span class="line">		<span class="keyword">while</span>(k--)&#123;</span><br><span class="line">			<span class="keyword">int</span> x = <span class="built_in">read</span>();</span><br><span class="line">			Addedge(x,n+i*<span class="number">2</span><span class="number">-1</span>,inf);</span><br><span class="line">			Addedge(n+i*<span class="number">2</span>,x,inf);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	writeln(ans - dinic());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="生成函数定义"><a href="#生成函数定义" class="headerlink" title="生成函数定义"></a>生成函数定义</h4><p>$G(x) = g_0+g_1x+g_2x^2+…… = \sum_{n&gt;=0} g_nx^n$，我们称$G$或者$G(z)$是数列$&lt;g_0,g_1,…&gt;$的生成函数。</p>
+<h4 id="常用生成函数"><a href="#常用生成函数" class="headerlink" title="常用生成函数"></a>常用生成函数</h4><p>$$<br>\sum_{n&gt;=0}[n=0]z^n = 1\<br>\sum_{n&gt;=0}z^n = \frac{1}{1-z}\\sum_{n&gt;=0}(-1)^nz^n = \frac{1}{1+z}\\sum_{n&gt;=0}\binom{m}{i}z^n = (1+z)^m\\sum_{n&gt;=0}\binom{n+m-1}{n}z^n = \frac{1}{(1-z)^m}\\sum_{n&gt;=1}\frac{1}{n}z^n = \ln\frac{1}{1-z}\\sum_{n&gt;=1}\frac{(-1)^{n+1}}{n}z^n = \ln(1+z)\\sum_{n&gt;=0}\frac{1}{n!}z^n = e^x<br>$$</p>
+<p>写到这里发现自己不会$\ln$这玩意儿</p>
+<p>感觉自己多项式也一窍不通……发现自己$ln$是啥都不知道</p>
+<p>$exp$是怎么定义来着的?$exp(A(x)) = \sum_{i&gt;=0}\frac{A^i(x)}{i!}$</p>
+<p>$ln$只知道一个结论：$ln(x) = \frac{1}{x}$，所以$ln(f(x)) = \int\frac{f’(x)}{f(x)}$？大概就是对的吧</p>
+<p>把$f(x) = e^{g(x)}$代进去，发现$ln(e^{g(x)}) = \int\frac{e^g(x)*g’(x)}{e^{g(x)}} = g(x)$</p>
+<p>看起来非常真。嗯。</p>
+<h4 id="生成函数运算"><a href="#生成函数运算" class="headerlink" title="生成函数运算"></a>生成函数运算</h4><p>是生成函数的一些运算，大概就是多项式的一些运算。</p>
+<p>有一个就是求前缀和就是卷积上$&lt;1 ,1,1,1,…&gt; = \frac{1}{1-z}$</p>
+<h4 id="简单生成函数求法"><a href="#简单生成函数求法" class="headerlink" title="简单生成函数求法"></a>简单生成函数求法</h4><p>举一个例子吧，比如说斐波那切数列的生成函数，因为有$f(x)=f(x-1)+f(x-2)$有$F = xF + x^2F + 1$，所以是$F = \frac{1}{1-x-x^2}$</p>
+<h4 id="解递归式"><a href="#解递归式" class="headerlink" title="解递归式"></a>解递归式</h4><p>大概就是知道生成函数求通项公式，看起来在做数列题的时候可能会有点用？</p>
+<h5 id="一类特殊的生成函数"><a href="#一类特殊的生成函数" class="headerlink" title="一类特殊的生成函数"></a>一类特殊的生成函数</h5><p>大概是分母可以进行部分分式分解的</p>
+<p>一个需要证明的东西：</p>
+<p>$R(z) = \frac{P(z)}{Q(z)}$，其中$P$,$Q$是多项式，然后要求R的第n项的系数。</p>
+<p>根据刚才的东西，我们知道<br>$$<br>\frac{1}{(1-px)^{m+1}} = \sum_{n&gt;=0}\binom{m+n}{m}p^nz^n<br>$$<br>这东西可以快速算它的一个位置上的值。</p>
+<p>然后如果是若干个上面的东西的和<br>$$<br>\frac{a_1}{(1-p_1x)^{m_1}} + \frac{a_2}{(1-p_2x)^{m_2}}+…<br>$$<br>也是很好求的，只需要把每一项的系数加起来就行了。</p>
+<p>然后可以证明对于$R(0) \not= \infty$的有理函数$R(x)$都可以表示成$R(x) = S(x) + T(x)$，其中S是上面那个形式，T是一个多项式。【不知道为什么，不会证明】</p>
+<p>所以主要是要部分分式分解。</p>
+<p>先考虑如何把下面的那些$p_i$求出来。</p>
+<p>假如$Q(x) = q_0+q_1x+…+q_mx^m | q_0\not=0,q_m\not=0$</p>
+<p>我们令$Q^R(x) = q_0x^m+…+q_m$    </p>
+<p>有$Q^R(x) = q0(x-\rho_0)(x-\rho_1)…(x-\rho_m)$</p>
+<p>有$Q(x) = q0(1-\rho_0x)(1-\rho_1x)…(1-\rho_mx)$</p>
+<p>也就是$Q^R$的根是$Q$的根的倒数。</p>
+<p>也就是，我们对$Q^R$进行求根，就能得到这若干个$\rho$的值，<strong>先假设这些$\rho$都不相同（有相同不会）</strong>。</p>
+<p>然后是主要分解部分</p>
+<p>大概就是如果一个函数本来是<br>$$<br>\frac{P(x)}{Q(x)}=\frac{P(x)}{(1-\rho_1x)(1-\rho_2x)(1-\rho_3x)…}<br>$$<br>那么可以把它分解成<br>$$<br>\frac{a_1}{1-\rho_1x} + \frac{a_2}{1-\rho_2x} ……<br>$$<br>其中$a_1,a_2$这些都是常数，这个东西就是可以直接算结论的了。</p>
+<p>嗯，感觉手解递推式的话上面手动分解，下面手动待定系数来求就行了。</p>
+<p>那如何用计算机来做这个部分分式分解呢？（还是要$\rho$不同的情况）</p>
+<p>$a_i$就是$a_i = \Large \frac{P(\frac{1}{\rho_i})}{Q_i(\frac{1}{\rho_i})}$</p>
+<p>$Q_i(x) = Q(x) / (1-\rho_ix)$</p>
+<p>这东西证明大概就是，把这n个点代进去，发现和原来的式子的答案都是一样的。</p>
+<p>具体就是，通分之后，只有一个乘积的式子是有值的，剩下的都是0，然后又值的那个式子和原式子是一样的。</p>
+<p>然后怎么快速计算$Q_i(\frac{1}{\rho_i})$</p>
+<p>这东西就直接对Q求导，然后直接把$\frac{1}{\rho_i}$代到$Q’$里面就行了。</p>
+<p>这东西用多项式多点求值可以在两个log的复杂度里面做出来。</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>​        </p>
 
       
     </div>
@@ -280,13 +306,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/11/09/BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9/">BZOJ3438 小M的作物</a></p>
+        <p><span>本文标题:</span><a href="/2019/11/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/">生成函数学习笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">emoairx</a></p>
-        <p><span>发布时间:</span>2019-11-09, 16:46:29</p>
-        <p><span>最后更新:</span>2018-02-03, 16:37:14</p>
+        <p><span>发布时间:</span>2019-11-09, 19:05:31</p>
+        <p><span>最后更新:</span>2019-11-09, 19:12:43</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/11/09/BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9/" title="BZOJ3438 小M的作物">http://emoairx.top/2019/11/09/BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/09/BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9/　　作者: emoairx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/" title="生成函数学习笔记">http://emoairx.top/2019/11/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/　　作者: emoairx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -298,16 +324,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/11/09/BZOJ3571%20%5BHnoi2014%5D%E7%94%BB%E6%A1%86/">
-                    BZOJ3571 [Hnoi2014]画框
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/11/09/BZOJ3118%20Orz%20the%20MST/">
-                    BZOJ3118 Orz the MST
+                <a href="/2019/11/09/readme/">
+                    readme
                 </a>
             </div>
         
@@ -319,7 +339,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#题面"><span class="toc-number">1.</span> <span class="toc-text">题面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题解"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#生成函数定义"><span class="toc-number">1.</span> <span class="toc-text">生成函数定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用生成函数"><span class="toc-number">2.</span> <span class="toc-text">常用生成函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生成函数运算"><span class="toc-number">3.</span> <span class="toc-text">生成函数运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#简单生成函数求法"><span class="toc-number">4.</span> <span class="toc-text">简单生成函数求法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解递归式"><span class="toc-number">5.</span> <span class="toc-text">解递归式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#一类特殊的生成函数"><span class="toc-number">5.1.</span> <span class="toc-text">一类特殊的生成函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">6.</span> <span class="toc-text"></span></a></li></ol>
         
     </div>
     <style>
@@ -355,7 +375,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"BZOJ3438 小M的作物　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"生成函数学习笔记　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -397,15 +417,13 @@ new Valine({
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/09/BZOJ3571%20%5BHnoi2014%5D%E7%94%BB%E6%A1%86/" title="上一篇: BZOJ3571 [Hnoi2014]画框">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/11/09/BZOJ3118%20Orz%20the%20MST/" title="下一篇: BZOJ3118 Orz the MST">
+            <a href="/2019/11/09/readme/" title="下一篇: readme">
                 <i class="fa fa-angle-right"></i>
             </a>
         
