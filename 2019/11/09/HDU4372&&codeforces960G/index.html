@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="wzporz" />
+
+
+
+<meta name="description" content="题面 n幢楼高度分别为1到n，问有多少个排列，从左往右看有x幢楼，从右往左看有y幢楼。  ​    cf960G(T=1,n&amp;lt;=100000) ​    本题类似于HDU4372(T&amp;lt;=100000; n&amp;lt;=2000)">
+<meta name="keywords" content="DP,HDU,codeforces,FFT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDU4372&amp;&amp;codeforces960G">
+<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;09&#x2F;HDU4372&amp;&amp;codeforces960G&#x2F;index.html">
+<meta property="og:site_name" content="Wzp Ak King">
+<meta property="og:description" content="题面 n幢楼高度分别为1到n，问有多少个排列，从左往右看有x幢楼，从右往左看有y幢楼。  ​    cf960G(T=1,n&amp;lt;=100000) ​    本题类似于HDU4372(T&amp;lt;=100000; n&amp;lt;=2000)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;09&#x2F;HDU4372&amp;&amp;codeforces960G&#x2F;%E6%97%A0%E6%A0%87%E9%A2%98.png">
+<meta property="og:updated_time" content="2018-11-17T09:25:18.448Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;09&#x2F;HDU4372&amp;&amp;codeforces960G&#x2F;%E6%97%A0%E6%A0%87%E9%A2%98.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Wzp Ak King" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="https://cdnjs.loli.net/ajax/libs/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="https://cdnjs.loli.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="https://cdnjs.loli.net/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>HDU4372&amp;&amp;codeforces960G | Wzp Ak King</title>
+
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "https://cdnjs.loli.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "https://cdnjs.loli.net/ajax/libs/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">wzporz</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/wzporz" target="_blank" rel="noopener" title="知乎"></a>
+                            
+                                <a class="fa QQ" href="/tencent:/message/?uin=15312329&Site=&Menu=yes" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BZOJ/" rel="tag">BZOJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDQ%E5%88%86%E6%B2%BB/" rel="tag">CDQ分治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDU/" rel="tag">HDU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCT/" rel="tag">LCT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOJ/" rel="tag">LOJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UOJ/" rel="tag">UOJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atcoder/" rel="tag">atcoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/" rel="tag">bitset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihoCoder/" rel="tag">hihoCoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag">二分图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%B3%95/" rel="tag">二分法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="tag">优先队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88/" rel="tag">博弈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="tag">后缀自动机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/" rel="tag">容斥原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%BA%E8%BF%9E%E9%80%9A%E7%BC%A9%E7%82%B9/" rel="tag">强连通缩点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B4%E4%BD%93%E4%BA%8C%E5%88%86/" rel="tag">整体二分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96/" rel="tag">斜率优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B/" rel="tag">暴力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag">最短路</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%9F%E6%9C%9B/" rel="tag">期望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91/" rel="tag">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E8%AE%B0/" rel="tag">游记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%82%B9%E5%88%86%E6%B2%BB/" rel="tag">点分治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag">网络流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" rel="tag">计算几何</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">wzporz</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">wzporz</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/wzporz" title="知乎"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/tencent:/message/?uin=15312329&Site=&Menu=yes" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-HDU4372&amp;&amp;codeforces960G" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/09/HDU4372&&codeforces960G/" class="article-date">
+      <time datetime="2019-11-09T08:46:29.980Z" itemprop="datePublished">2019-11-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HDU4372&amp;&amp;codeforces960G
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FFT/" rel="tag">FFT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HDU/" rel="tag">HDU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h4 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h4><blockquote>
+<p>n幢楼高度分别为1到n，问有多少个排列，从左往右看有x幢楼，从右往左看有y幢楼。</p>
+</blockquote>
+<p>​    <a href="http://codeforces.com/problemset/problem/960/G" target="_blank" rel="noopener">cf960G</a>(T=1,n&lt;=100000)</p>
+<p>​    本题类似于<a href="http://acm.hdu.edu.cn/showproblem.php?pid=4372" target="_blank" rel="noopener">HDU4372</a>(T&lt;=100000; n&lt;=2000)</p>
+<a id="more"></a>
+
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>考虑枚举最大的数出现的位置。</p>
+<p>然后容易得到左边和右边分别处理（只有一边）</p>
+<p>令$f[i][j]$表示前i个数字中当前答案为j的有多少种情况。</p>
+<p>容易得到$f[i][j] = f[i-1][j-1] + f[i-1][j]*(i-1)$</p>
+<p>观察发现这是无符号第一类斯特林数。</p>
+<p>因此问题转化为</p>
+<p>$\Large \sum ^{n-B}<em>{i=A}$ $\Large [ ^{i-1}</em>{A-1} ]$ $\Large \times (^{n-1}<em>{i-1}) \times (^{n-i}</em>{B-1})$</p>
+<p>然后一列是求不来的，考虑化简。</p>
+<p>我们发现上面式子的含义相当于是在n-1个元素中取出若干的圆排列，再在这若干个排列中取出A-1个放在左边。</p>
+<hr>
+<p>其实考虑组合意义也一样。</p>
+<p>我们把左边的每一个最高的提出来，然后和它的最靠近的右边的看作一个环，右边同理。</p>
+<p>那么问题变成在$n-1$个元素中选出$A+B-2$个圆，然后这些圆可以任意排列</p>
+<p>如图，下面的黑色是最高的，红色是选中的一些，绿色是要求的。<img src="%E6%97%A0%E6%A0%87%E9%A2%98.png" alt="如图"></p>
+<p>综上所述</p>
+<p>$$\Huge Ans = [^{n-1}_{A+B-2}] \times \binom{A+B-2}{A-1}$$</p>
+<hr>
+<p>然后HDU那题就可以直接做了，以下核心代码（不能用bits差评）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Mod = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> s[<span class="number">2005</span>][<span class="number">2005</span>],c[<span class="number">2005</span>][<span class="number">2005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> n = <span class="number">2000</span>;</span><br><span class="line">	s[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	c[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	Rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">		s[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">		c[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">		Rep(j,<span class="number">1</span>,i)&#123;</span><br><span class="line">			s[i][j] = (s[i<span class="number">-1</span>][j<span class="number">-1</span>] + (ll)s[i<span class="number">-1</span>][j] * (i<span class="number">-1</span>))%Mod;</span><br><span class="line">			c[i][j] = (c[i<span class="number">-1</span>][j<span class="number">-1</span>] + c[i<span class="number">-1</span>][j])%Mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	init();</span><br><span class="line">	<span class="keyword">int</span> T = rd();</span><br><span class="line">	<span class="keyword">while</span>(T--)&#123;</span><br><span class="line">		<span class="keyword">int</span> n,A,B;</span><br><span class="line">		n = rd(),A =rd(),B = rd();</span><br><span class="line">		<span class="keyword">if</span>(A+B<span class="number">-2</span>&gt;n)&#123;<span class="comment">//注意特判</span></span><br><span class="line">			<span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			writeln(<span class="number">1l</span>l*s[n<span class="number">-1</span>][A+B<span class="number">-2</span>]*c[A+B<span class="number">-2</span>][A<span class="number">-1</span>]%Mod);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>然后CF这题n比较大。</p>
+<p>所以似乎只能分治FFT(或者倍增FFT)来做。</p>
+<p><strong>第一类斯特林数性质</strong>：$\large x^{n↑} = \sum_{i=0}^{n} s_{n,i} \times x^i$</p>
+<p>考虑展开：$x\times (x+1)\times (x+2)\times (x+3)$……</p>
+<p>这个显然可以分治FFT。</p>
+<p>先处理左边和右边，然后FFT合并。</p>
+<p>时间复杂度$T(n) = T(\frac{n}{2})\times 2 + O(n log_2n) = O(n log^2_2n)$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//神仙Wzp已经Ak了IOI2018</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vi;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>,oo = inf;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RG register</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(RG int i=(a);i&lt;(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rep(i,a,b) for(RG int i=(a);i&lt;=(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Dep(i,a,b) for(RG int i=(a);i&gt;=(b);--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pc putchar</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line"><span class="keyword">char</span> __wzp[<span class="number">1</span>&lt;&lt;<span class="number">15</span>|<span class="number">1</span>],*__S=__wzp+<span class="number">32768</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc() (__S&gt;=__wzp+32768?(__wzp[fread(__wzp,sizeof(char),1&lt;&lt;15,stdin)]=EOF),*((__S=__wzp)++):*(__S++))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	RG ll x=<span class="number">0</span>,f=<span class="number">1</span>;RG <span class="keyword">char</span> c=gc();</span><br><span class="line">	<span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c=gc())<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);c=gc())x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(c^<span class="number">48</span>);</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(ll x)</span></span>&#123;<span class="keyword">if</span>(x&lt;<span class="number">0</span>)x=-x,pc(<span class="string">'-'</span>);<span class="keyword">if</span>(x&gt;=<span class="number">10</span>)<span class="built_in">write</span>(x/<span class="number">10</span>);pc(x%<span class="number">10</span>+<span class="string">'0'</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">writeln</span><span class="params">(ll x)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">puts</span>(<span class="string">""</span>);&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> debug(x) printf(#x<span class="meta-string">" = %d\n"</span>,x);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rd read</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(x,v) memset(x,v,sizeof(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sqr(x) ((x)*(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((x)&amp;(-(x)))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fin(x) freopen(#x<span class="meta-string">".in"</span>,<span class="meta-string">"r"</span>,stdin)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fout(x) freopen(#x<span class="meta-string">".in"</span>,<span class="meta-string">"w"</span>,stdout)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> y1 ____y1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> hash __hash</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> union _union</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2662145</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> g = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> n,A,B;</span><br><span class="line"><span class="keyword">int</span> fac[maxn],inv[maxn];</span><br><span class="line"><span class="keyword">int</span> rev[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ppow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;b;b&gt;&gt;=<span class="number">1</span>,a=<span class="number">1l</span>l*a*a%Mod)</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) ans=<span class="number">1l</span>l*ans*a%Mod;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Pow ppow</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> nn,<span class="keyword">int</span> flag)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="number">0</span>,logn=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(n=<span class="number">1</span>;n&lt;nn;n&lt;&lt;=<span class="number">1</span>) logn++;</span><br><span class="line">	rep(i,<span class="number">0</span>,n) rev[i] = (rev[i&gt;&gt;<span class="number">1</span>] &gt;&gt; <span class="number">1</span>) | ((i&amp;<span class="number">1</span>) &lt;&lt; (logn<span class="number">-1</span>));</span><br><span class="line">	rep(i,<span class="number">0</span>,n) <span class="keyword">if</span>(i&lt;rev[i]) swap(a[i],a[rev[i]]);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> wn = ppow(g,(Mod<span class="number">-1</span>) / (i &lt;&lt; <span class="number">1</span>)),x,y;</span><br><span class="line">		<span class="keyword">if</span>(flag==<span class="number">-1</span>) wn=ppow(wn,Mod<span class="number">-2</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j+=(i&lt;&lt;<span class="number">1</span>))</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>,w=<span class="number">1</span>;k&lt;i;++k,w=<span class="number">1l</span>l*w*wn%Mod)&#123;</span><br><span class="line">				x = a[j+k],y = <span class="number">1l</span>l * w * a[i+j+k] % Mod;</span><br><span class="line">				a[j+k]=(x+y)%Mod;a[j+k+i]=(x-y+Mod)%Mod;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag==<span class="number">-1</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> invn = ppow(n,Mod<span class="number">-2</span>);</span><br><span class="line">		rep(i,<span class="number">0</span>,n) a[i] = <span class="number">1l</span>l*a[i]*invn%Mod;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fac[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	Rep(i,<span class="number">1</span>,n) fac[i] = <span class="number">1l</span>l*fac[i<span class="number">-1</span>] * i % Mod;</span><br><span class="line">	inv[n] = ppow(fac[n],Mod<span class="number">-2</span>);</span><br><span class="line">	Dep(i,n<span class="number">-1</span>,<span class="number">0</span>) inv[i] = <span class="number">1l</span>l*inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%Mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1l</span>l*fac[n]*inv[m]%Mod*inv[n-m]%Mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> x[maxn],y[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l+<span class="number">2</span>==r) <span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">int</span> mid = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	solve(A,l,mid);solve(A,mid,r);</span><br><span class="line">	rep(i,l,mid) x[i-l] = A[i],x[i+mid-l-l] = <span class="number">0</span>;</span><br><span class="line">	rep(i,mid,r) y[i-mid] = A[i],y[i-l] = <span class="number">0</span>;</span><br><span class="line">	NTT(x,r-l,<span class="number">1</span>),NTT(y,r-l,<span class="number">1</span>);</span><br><span class="line">	rep(i,<span class="number">0</span>,r-l) x[i]=<span class="number">1l</span>l*x[i]*y[i]%Mod;</span><br><span class="line">	NTT(x,r-l,<span class="number">-1</span>);</span><br><span class="line">	rep(i,l,r) A[i]=x[i-l];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Stirling</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	rep(i,<span class="number">0</span>,<span class="number">131072</span>) A[i&lt;&lt;<span class="number">1</span>]=<span class="number">1</span>,A[i&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=<span class="number">0</span>; </span><br><span class="line">	rep(i,<span class="number">0</span>,n) A[i&lt;&lt;<span class="number">1</span>]=i,A[i&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> e=<span class="number">1</span>;<span class="keyword">for</span>(;e&lt;<span class="number">2</span>*n;e&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	solve(A,<span class="number">0</span>,e);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> Stir[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	n = rd(),A =rd(),B = rd();</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(A==<span class="number">1</span>&amp;&amp;B==<span class="number">1</span>) <span class="built_in">puts</span>(<span class="string">"1"</span>); <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!A||!B||A+B<span class="number">-2</span>&gt;n)&#123;</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	init();</span><br><span class="line">	Stirling(Stir,n<span class="number">-1</span>);</span><br><span class="line">	writeln(<span class="number">1l</span>l*Stir[A+B<span class="number">-2</span>]*C(A+B<span class="number">-2</span>,A<span class="number">-1</span>)%Mod);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>跑了$2137ms$</p>
+<hr>
+<p>还有倍增FFT的做法$O(n log n)$。</p>
+<p>$\Large x^{2n↑} = x^{n↑} \times (x+n)^{n↑} $</p>
+<p>后者可以由前者得到。</p>
+<p>假设前者的系数为($a0,a1,a2,a3,a4……an$)，当然a0=0</p>
+<p>容易知道</p>
+<p>$b = a_0(x+n)^0 + a_1(x+n)^1 + a_2(x+n)^2 +a_3(x+n)^3 + a_4(x+n)^4 …a_n(x+n)^n$</p>
+<p>考虑用二项式展开</p>
+<p>$a_0 + n^1\times a_1\times C(1,0) + n^2\times a_2\times C(2,0) + ……$<br>      $n^0\times a_1\times C(1,1) + n^1\times a_2\times C(2,1) + ……$</p>
+<p>​                    $ + n^0*a_2\times C(2,2) + ……$</p>
+<p>​                        $……$</p>
+<p>所以可以得到</p>
+<p>$\Large b_i =\sum _{j=i} ^{n} a_j \times n^{j-i}\times C(j,i)$</p>
+<p>$\Large i!b_i =\sum _{j=i} ^{n} a_j \times n^{j-i}\times \frac{j!}{(j-i)!}$</p>
+<p>令$\Large x_i = a_i \times i!,y_i = \frac{n^{i}}{i!}$ </p>
+<p>注意到此时</p>
+<p>$\Large i! b_i =\sum <em>{j=i}^{n} x_j\times y</em>{j-i}$</p>
+<p>$\Large {(n-i)!}b_{n-i} = \sum <em>{j=0}^{i} x</em>{n-j}y_{j-i}$</p>
+<p>因此我们可以翻转多项式x，乘好之后再翻转答案多项式，然后乘上相应的系数的逆元。</p>
+<p>常数非常不优秀(311ms)，WZP的常数是我的三分之一左右，怒拿运行时间rank1（杜教第二）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//神仙Wzp已经Ak了IOI2018</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vi;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>,oo = inf;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RG register</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(RG int i=(a);i&lt;(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rep(i,a,b) for(RG int i=(a);i&lt;=(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Dep(i,a,b) for(RG int i=(a);i&gt;=(b);--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pc putchar</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL</span></span><br><span class="line"><span class="keyword">char</span> __wzp[<span class="number">1</span>&lt;&lt;<span class="number">15</span>|<span class="number">1</span>],*__S=__wzp+<span class="number">32768</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc() (__S&gt;=__wzp+32768?(__wzp[fread(__wzp,sizeof(char),1&lt;&lt;15,stdin)]=EOF),*((__S=__wzp)++):*(__S++))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	RG ll x=<span class="number">0</span>,f=<span class="number">1</span>;RG <span class="keyword">char</span> c=gc();</span><br><span class="line">	<span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c=gc())<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);c=gc())x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(c^<span class="number">48</span>);</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(ll x)</span></span>&#123;<span class="keyword">if</span>(x&lt;<span class="number">0</span>)x=-x,pc(<span class="string">'-'</span>);<span class="keyword">if</span>(x&gt;=<span class="number">10</span>)<span class="built_in">write</span>(x/<span class="number">10</span>);pc(x%<span class="number">10</span>+<span class="string">'0'</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">writeln</span><span class="params">(ll x)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">puts</span>(<span class="string">""</span>);&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> debug(x) printf(#x<span class="meta-string">" = %d\n"</span>,x);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rd read</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(x,v) memset(x,v,sizeof(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sqr(x) ((x)*(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((x)&amp;(-(x)))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fin(x) freopen(#x<span class="meta-string">".in"</span>,<span class="meta-string">"r"</span>,stdin)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fout(x) freopen(#x<span class="meta-string">".in"</span>,<span class="meta-string">"w"</span>,stdout)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> y1 ____y1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> hash __hash</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> union _union</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2662145</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> g = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> n,A,B;</span><br><span class="line"><span class="keyword">int</span> fac[maxn],inv[maxn];</span><br><span class="line"><span class="keyword">int</span> rev[maxn];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ppow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;b;b&gt;&gt;=<span class="number">1</span>,a=<span class="number">1l</span>l*a*a%Mod)</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) ans=<span class="number">1l</span>l*ans*a%Mod;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> nn,<span class="keyword">int</span> flag)</span></span>&#123;</span><br><span class="line">	RG <span class="keyword">int</span> n = <span class="number">0</span>,logn=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(n=<span class="number">1</span>;n&lt;nn;n&lt;&lt;=<span class="number">1</span>) logn++;</span><br><span class="line">	rep(i,<span class="number">0</span>,n) rev[i] = (rev[i&gt;&gt;<span class="number">1</span>] &gt;&gt; <span class="number">1</span>) | ((i&amp;<span class="number">1</span>) &lt;&lt; (logn<span class="number">-1</span>));</span><br><span class="line">	rep(i,<span class="number">0</span>,n) <span class="keyword">if</span>(i&lt;rev[i]) swap(a[i],a[rev[i]]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(RG <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">		RG <span class="keyword">int</span> wn = ppow(g,(Mod<span class="number">-1</span>) / (i &lt;&lt; <span class="number">1</span>)),x,y;</span><br><span class="line">		<span class="keyword">for</span>(RG <span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j+=(i&lt;&lt;<span class="number">1</span>))</span><br><span class="line">			<span class="keyword">for</span>(RG <span class="keyword">int</span> k=<span class="number">0</span>,w=<span class="number">1</span>;k&lt;i;++k,w=<span class="number">1l</span>l*w*wn%Mod)&#123;</span><br><span class="line">				x = a[j+k],y = <span class="number">1l</span>l * w * a[i+j+k] % Mod;</span><br><span class="line">				a[j+k]=(x+y)%Mod;</span><br><span class="line">				a[i+j+k]=(x-y+Mod)%Mod;</span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag==<span class="number">-1</span>)&#123;</span><br><span class="line">		reverse(a+<span class="number">1</span>,a+n);</span><br><span class="line">		<span class="keyword">int</span> invn = ppow(n,Mod<span class="number">-2</span>);</span><br><span class="line">		rep(i,<span class="number">0</span>,n) a[i] = <span class="number">1l</span>l*a[i]*invn%Mod;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fac[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	Rep(i,<span class="number">1</span>,n) fac[i] = <span class="number">1l</span>l*fac[i<span class="number">-1</span>] * i % Mod;</span><br><span class="line">	inv[n] = ppow(fac[n],Mod<span class="number">-2</span>);</span><br><span class="line">	Dep(i,n<span class="number">-1</span>,<span class="number">0</span>) inv[i] = <span class="number">1l</span>l*inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%Mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1l</span>l*fac[n]*inv[m]%Mod*inv[n-m]%Mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> x[maxn],y[maxn],z[maxn],Pow[maxn];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> x[],<span class="keyword">int</span> y[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> w = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(w=<span class="number">1</span>;w&lt;n+n;w&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	NTT(x,w,<span class="number">1</span>),NTT(y,w,<span class="number">1</span>);</span><br><span class="line">	rep(i,<span class="number">0</span>,w) x[i] = <span class="number">1l</span>l * x[i] * y[i] % Mod;</span><br><span class="line">	NTT(x,w,<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">		A[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(n&amp;<span class="number">1</span>)&#123;</span><br><span class="line">		solve(A,n<span class="number">-1</span>);</span><br><span class="line">		Dep(i,n,<span class="number">1</span>) A[i] = (A[i<span class="number">-1</span>] + <span class="number">1l</span>l * (n<span class="number">-1</span>) * A[i]) % Mod;</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	solve(A,n/<span class="number">2</span>);</span><br><span class="line">	Pow[<span class="number">0</span>] = <span class="number">1</span>;rep(i,<span class="number">1</span>,n/<span class="number">2</span>+<span class="number">1</span>) Pow[i] = <span class="number">1l</span>l * Pow[i<span class="number">-1</span>] * (n/<span class="number">2</span>) % Mod;</span><br><span class="line">	rep(i,<span class="number">0</span>,n/<span class="number">2</span>+<span class="number">1</span>) x[i] = <span class="number">1l</span>l * A[i] * fac[i] % Mod,</span><br><span class="line">			       y[i] = <span class="number">1l</span>l * Pow[i] * inv[i] % Mod;</span><br><span class="line">	reverse(x,x+n/<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">	mul(x,y,n/<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">	reverse(x,x+n/<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line">	rep(i,<span class="number">0</span>,n/<span class="number">2</span>+<span class="number">1</span>)&#123;</span><br><span class="line">		z[i] = <span class="number">1l</span>l * x[i] * inv[i] % Mod;</span><br><span class="line">		z[i+n/<span class="number">2</span>+<span class="number">1</span>] = <span class="number">0</span>;<span class="comment">//没有清0被续了好久</span></span><br><span class="line">	&#125;</span><br><span class="line">	mul(A,z,n/<span class="number">2</span>+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Stirling</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	solve(A,n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> Stir[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	n = rd(),A =rd(),B = rd();</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(A==<span class="number">1</span>&amp;&amp;B==<span class="number">1</span>) <span class="built_in">puts</span>(<span class="string">"1"</span>); <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!A||!B||A+B<span class="number">-2</span>&gt;n)&#123;</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	init();</span><br><span class="line">	Stirling(Stir,n<span class="number">-1</span>);</span><br><span class="line">	writeln(<span class="number">1l</span>l*Stir[A+B<span class="number">-2</span>]*C(A+B<span class="number">-2</span>,A<span class="number">-1</span>)%Mod);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/11/09/HDU4372&&codeforces960G/">HDU4372&amp;&amp;codeforces960G</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">wzporz</a></p>
+        <p><span>发布时间:</span>2019-11-09, 16:46:29</p>
+        <p><span>最后更新:</span>2018-11-17, 17:25:18</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/09/HDU4372&&codeforces960G/" title="HDU4372&amp;&amp;codeforces960G">http://emoairx.top/2019/11/09/HDU4372&amp;&amp;codeforces960G/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/09/HDU4372&amp;&amp;codeforces960G/　　作者: wzporz" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/11/09/HDU4685%20Prince%20and%20Princess/">
+                    HDU4685 Prince and Princess
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/11/09/dsu%20on%20tree/">
+                    dsu on tree
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#题面"><span class="toc-number">1.</span> <span class="toc-text">题面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Solution"><span class="toc-number">2.</span> <span class="toc-text">Solution</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"HDU4372&&codeforces960G　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+
+  
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+    
+new Valine({
+    el: '#vcomment',
+    notify: notify,
+    verify: verify,
+    app_id: "r2V9Iy6jfKDJtlRcYUpNHi3p-gzGzoHsz",
+    app_key: "BMVmp2ga1G0YpmWvVw1pESHw",
+    placeholder: "Input here.",
+    avatar:"mm"
+});
+</script>
+    </section>
+  
+
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/11/09/HDU4685%20Prince%20and%20Princess/" title="上一篇: HDU4685 Prince and Princess">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/11/09/dsu%20on%20tree/" title="下一篇: dsu on tree">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2018%20Day1/">ZJOI2018 Day1划水记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/%E6%BB%9A%E7%B2%97%E8%AE%B0/NOIP2017%E6%BB%9A%E7%B2%97%E8%AE%B0/">NOIP2017滚粗记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/%E6%BB%9A%E7%B2%97%E8%AE%B0/NOI2018%E5%90%8C%E6%AD%A5%E8%B5%9B%E4%BD%93%E9%AA%8C%E8%AE%B0/">NOI2018同步赛体验记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Suffix-automaton-notes/">后缀自动机学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Simple-convolution-notes/">学习笔记/Simple-convolution-notes</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/hihoCoder1252%20Kejin%20Game/hihoCoder1252%20Kejin%20Game/">hihoCoder1252 Kejin Game</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/">线性规划与网络流24题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/%E5%8D%9A%E4%B8%BB%E8%87%AA%E4%BC%A0/">蒟蒻自传</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/UOJ349%20%5BWC2018%5D%E5%8D%B3%E6%97%B6%E6%88%98%E7%95%A5/">UOJ349 [WC2018]即时战略</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/readme/">readme</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/LOJ2335%E3%80%8CJOI%2020162017%20%E5%86%B3%E8%B5%9B%E3%80%8D%E8%B6%B3%E7%90%83/">LOJ2335「JOI 20162017 决赛」足球</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/HDU4685%20Prince%20and%20Princess/">HDU4685 Prince and Princess</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/HDU4372&&codeforces960G/">HDU4372&&codeforces960G</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/dsu%20on%20tree/">dsu on tree</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/codeforces976F%20Minimal%20k-covering/">codeforces976F Minimal k-covering</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/codeforces920-Edu37/">codeforces920-Edu37</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/codeforces915-Edu36/">codeforces915-Edu36</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/codeforces914/">codeforces915</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/codeforces913%20Hello2018/">codeforces913-Hello2018</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/codeforces674D/">codeforces674D Bearish Fanpages</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ5093%20%E5%9B%BE%E7%9A%84%E4%BB%B7%E5%80%BC/">BZOJ5093 图的价值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ4562%20%5BHaoi2016%5D%E9%A3%9F%E7%89%A9%E9%93%BE/">BZOJ1050 [HAOI2006]旅行comf</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ4025%20%E4%BA%8C%E5%88%86%E5%9B%BE/">BZOJ4025 二分图</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ3784%20%E6%A0%91%E4%B8%8A%E7%9A%84%E8%B7%AF%E5%BE%84/">BZOJ3784 树上的路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ3571%20%5BHnoi2014%5D%E7%94%BB%E6%A1%86/">BZOJ3571 [Hnoi2014]画框</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9/">BZOJ3438 小M的作物</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ3118%20Orz%20the%20MST/">BZOJ3118 Orz the MST</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ2815%20%5BZJOI2012%5D%E7%81%BE%E9%9A%BE/">BZOJ2815 [ZJOI2012]灾难</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1937%20%5BShoi2004%5DMst%20%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">BZOJ1937 [Shoi2004]Mst 最小生成树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1834%20%5BZJOI2010%5Dnetwork%20%E7%BD%91%E7%BB%9C%E6%89%A9%E5%AE%B9/">BZOJ1834 [ZJOI2010]network 网络扩容</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1497%20%5BNOI2006%5D%E6%9C%80%E5%A4%A7%E8%8E%B7%E5%88%A9/">BZOJ1497 [NOI2006]最大获利</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1412%20%5BZJOI2009%5D%E7%8B%BC%E5%92%8C%E7%BE%8A%E7%9A%84%E6%95%85%E4%BA%8B/">BZOJ1412 [ZJOI2009]狼和羊的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1337%20%E6%9C%80%E5%B0%8F%E5%9C%86%E8%A6%86%E7%9B%96/">BZOJ1337 最小圆覆盖</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1095%5BZJOI2007%5DHide%20%E6%8D%89%E8%BF%B7%E8%97%8F/">BZOJ1095[ZJOI2007]Hide 捉迷藏</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1061%20%5BNoi2008%5D%E5%BF%97%E6%84%BF%E8%80%85%E6%8B%9B%E5%8B%9F/">BZOJ1061 [Noi2008]志愿者招募</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1050%20%5BHAOI2006%5D%E6%97%85%E8%A1%8Ccomf/">BZOJ1050 [HAOI2006]旅行comf</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOj1049%20%5BHAOI2006%5D%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97/">BZOj1049 [HAOI2006]数字序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1048%20%5BHAOI2007%5D%E5%88%86%E5%89%B2%E7%9F%A9%E9%98%B5/">BZOJ1048 [HAOI2007]分割矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1046%20%5BHAOI2007%5D%E4%B8%8A%E5%8D%87%E5%BA%8F%E5%88%97/">BZOJ1046 [HAOI2007]上升序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1045%20%5BHAOI2008%5D%E7%B3%96%E6%9E%9C%E4%BC%A0%E9%80%92/">BZOJ1045 [HAOI2008] 糖果传递</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1044%20%5BHAOI2008%5D%E6%9C%A8%E6%A3%8D%E5%88%86%E5%89%B2/">BZOJ1044 [HAOI2008]木棍分割</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1043%20%5BHAOI2008%5D%E4%B8%8B%E8%90%BD%E7%9A%84%E5%9C%86%E7%9B%98/">BZOJ1043 [HAOI2008]下落的圆盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1042%20%5BHAOI2008%5D%E7%A1%AC%E5%B8%81%E8%B4%AD%E7%89%A9/">BZOJ1042 [HAOI2008]硬币购物</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1041%20%5BHAOI2008%5D%E5%9C%86%E4%B8%8A%E7%9A%84%E6%95%B4%E7%82%B9/">BZOJ1041 [HAOI2008]圆上的整点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/BZOJ1040%20%5BZJOI2008%5D%E9%AA%91%E5%A3%AB/">BZOJ1040 [ZJOI2008]骑士</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/AGC024%20A-E%E9%A2%98%E8%A7%A3/">AGC024 A-E题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/1010%20%5BHNOI2008%5D%E7%8E%A9%E5%85%B7%E8%A3%85%E7%AE%B1toy/">BZOj1010 [HNOI2008]玩具装箱toy</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/09/1001%20%5BBeiJing2006%5D%E7%8B%BC%E6%8A%93%E5%85%94%E5%AD%90/">BZOJ1001 [BeiJing2006]狼抓兔子</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2019 wzporz
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="https://cdnjs.loli.net/ajax/libs/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 1;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
