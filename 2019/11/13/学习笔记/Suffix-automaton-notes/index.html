@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="emoairx" />
+
+
+
+<meta name="description" content="坑，也许不填了 定义S的后缀自动机的节点中包含且仅包含了S所有的子串。并且其状态最简（节点尽可能少） 后缀自动机（suffix automaton，简称SAM）一般由2部分组成:DAWG和Suffix Link">
+<meta name="keywords" content="后缀自动机,学习笔记,字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后缀自动机学习笔记">
+<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;13&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;Suffix-automaton-notes&#x2F;index.html">
+<meta property="og:site_name" content="Wzp Ak King">
+<meta property="og:description" content="坑，也许不填了 定义S的后缀自动机的节点中包含且仅包含了S所有的子串。并且其状态最简（节点尽可能少） 后缀自动机（suffix automaton，简称SAM）一般由2部分组成:DAWG和Suffix Link">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;cqz15&#x2F;Desktop&#x2F;hexo%E5%A4%87%E4%BB%BD&#x2F;source&#x2F;_posts&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;WF.png">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;cqz15&#x2F;Desktop&#x2F;hexo%E5%A4%87%E4%BB%BD&#x2F;source&#x2F;_posts&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;%E6%9E%84%E9%80%A02.jpg">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;cqz15&#x2F;Desktop&#x2F;hexo%E5%A4%87%E4%BB%BD&#x2F;source&#x2F;_posts&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;%E6%9E%84%E9%80%A03.jpg">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;cqz15&#x2F;Desktop&#x2F;hexo%E5%A4%87%E4%BB%BD&#x2F;source&#x2F;_posts&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;%E6%9E%84%E9%80%A04.jpg">
+<meta property="og:image" content="c:&#x2F;Users&#x2F;cqz15&#x2F;Desktop&#x2F;hexo%E5%A4%87%E4%BB%BD&#x2F;source&#x2F;_posts&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;%E6%9E%84%E9%80%A05.jpg">
+<meta property="og:updated_time" content="2019-11-09T10:24:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:&#x2F;Users&#x2F;cqz15&#x2F;Desktop&#x2F;hexo%E5%A4%87%E4%BB%BD&#x2F;source&#x2F;_posts&#x2F;%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;WF.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Wzp Ak King" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="https://cdnjs.loli.net/ajax/libs/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="https://cdnjs.loli.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="https://cdnjs.loli.net/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>后缀自动机学习笔记 | Wzp Ak King</title>
+
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "https://cdnjs.loli.net/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "https://cdnjs.loli.net/ajax/libs/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: false
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">emoairx</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa 知乎" href="https://www.zhihu.com/people/wzporz" target="_blank" rel="noopener" title="知乎"></a>
+                            
+                                <a class="fa QQ" href="/tencent:/message/?uin=15312329&Site=&Menu=yes" title="QQ"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BZOJ/" rel="tag">BZOJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDQ%E5%88%86%E6%B2%BB/" rel="tag">CDQ分治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HDU/" rel="tag">HDU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LCT/" rel="tag">LCT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LOJ/" rel="tag">LOJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UOJ/" rel="tag">UOJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atcoder/" rel="tag">atcoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitset/" rel="tag">bitset</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hihoCoder/" rel="tag">hihoCoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" rel="tag">二分图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86%E6%B3%95/" rel="tag">二分法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="tag">优先队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8D%E5%A2%9E/" rel="tag">倍增</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB/" rel="tag">分治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%BC%88/" rel="tag">博弈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="tag">后缀自动机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag">多项式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/" rel="tag">容斥原理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%BA%E8%BF%9E%E9%80%9A%E7%BC%A9%E7%82%B9/" rel="tag">强连通缩点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B4%E4%BD%93%E4%BA%8C%E5%88%86/" rel="tag">整体二分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96/" rel="tag">斜率优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B/" rel="tag">暴力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag">最短路</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%9F%E6%9C%9B/" rel="tag">期望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91/" rel="tag">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E8%AE%B0/" rel="tag">游记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%82%B9%E5%88%86%E6%B2%BB/" rel="tag">点分治</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/" rel="tag">生成函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag">网络流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" rel="tag">计算几何</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">emoairx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">emoairx</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa 知乎" target="_blank" href="https://www.zhihu.com/people/wzporz" title="知乎"></a>
+                            
+                                <a class="fa QQ" target="_blank" href="/tencent:/message/?uin=15312329&Site=&Menu=yes" title="QQ"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-学习笔记/Suffix-automaton-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Suffix-automaton-notes/" class="article-date">
+      <time datetime="2019-11-12T22:46:48.390Z" itemprop="datePublished">2019-11-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      后缀自动机学习笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="tag">后缀自动机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><strong>坑，也许不填了</strong></p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>S的后缀自动机的节点中包含且仅包含了S所有的子串。并且其状态最简（节点尽可能少）</p>
+<p>后缀自动机（suffix automaton，简称SAM）一般由2部分组成:<strong>DAWG</strong>和<strong>Suffix Link</strong></p>
+<a id="more"></a>
+
+<h4 id="DAWG"><a href="#DAWG" class="headerlink" title="DAWG"></a>DAWG</h4><p>定义$trans[x][c]$表示从节点（状态）x，加入字符c后到达的状态，可以类比AC自动机构建出的$trie$图。但它是一个<strong>DAG</strong> 。从根到达某一个点的路径其实就是子串的若干字符</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h4 id="1、字符串的子串。"><a href="#1、字符串的子串。" class="headerlink" title="1、字符串的子串。"></a>1、字符串的子串。</h4><p>一个状态能代表字符串的子串，根据定义可以知道所有节点代表的字符串的集合的并就是S的所有子串，容易理解每个节点代表的字符串的子串都应该是不重复的。</p>
+<p>其中一个节点能表示的子串相当于root顺着trans能走到它的一些路径</p>
+<blockquote>
+<p>字符串<code>aabaabaab</code>中，某一个节点x表示字符串{<code>aab</code>,<code>ab</code>,<code>b</code>}</p>
+<blockquote>
+<p>为了简化状态，一个节点可以表示多个子串，如某个节点表示{<code>aa</code>}，那么可以表示第一个a，也可以表示第二个，第四个……而且得保证之后不会再有节点表示<code>aa</code></p>
+</blockquote>
+</blockquote>
+<p>有一个性质就是，每个串都是比它长的那一个串的后缀。而且长度相差为1。</p>
+<h4 id="2、max和min"><a href="#2、max和min" class="headerlink" title="2、max和min"></a>2、max和min</h4><p>定义max为某个串能表示的所有子串中长度最长的，min表示能表示的串中长度最短的。</p>
+<p>注意，min不一定为1。</p>
+<p>根据定义，$max-min+1$就是这个串能表示的所有本质不同的子串的数量。</p>
+<p>同样知道$\sum _{i=1}^{maxnode} max[i]-min[i]+1$就是S中本质不同的字符串的数量。</p>
+<h4 id="3、-right-集合-endpos"><a href="#3、-right-集合-endpos" class="headerlink" title="3、$right$集合($endpos$)"></a>3、$right$集合($endpos$)</h4><p>一个状态的$endpos$代表它能代表的子串的结束位置</p>
+<p>同时定义$Cntpos$为$|endpos|$</p>
+<blockquote>
+<p>字符串<code>aabaabaab</code>中，若某一个节点x表示{<code>aab</code>,<code>ab</code>,<code>b</code>}right集合有{3,6,9}，其$Cntpos$ = 3</p>
+</blockquote>
+<p>所有节点的$Cntpos$再乘上其能表示的子串大小之和就是S所有子串的数目。</p>
+<h4 id="4、转移边"><a href="#4、转移边" class="headerlink" title="4、转移边"></a>4、转移边</h4><p>定义$trans(x,c)$表示状态$x$加入字符$c$后能转移到哪里。</p>
+<h4 id="5、后缀链接-Suffix-Link-和parents树"><a href="#5、后缀链接-Suffix-Link-和parents树" class="headerlink" title="5、后缀链接(Suffix Link)和parents树"></a>5、后缀链接(Suffix Link)和parents树</h4><p>用$next(i)$表示$i$的后缀链接</p>
+<p>一个状态有且仅一个后缀链接，表示这个串能表示的最短子串能从哪个状态所代表的最长子串通过去点最前面那个字符得到</p>
+<p>如某个状态x表示{<code>aab</code>,<code>aaab</code>}，如果有一个状态y<strong>包含</strong>{<code>ab</code>}，那么x的后缀链接(Suffix Link)就连向y，如果这时候有一个状态z表示{<code>b</code>}，那么y的后缀链接转移到z。</p>
+<p>容易发现，$min(x) = max(next(x)) + 1$</p>
+<p>由于S的所有子串当且仅当在一个节点中出现，所以每个点只可能有一条后缀链接（开始节点没有后缀连接），后缀链接能构成一棵树。我们叫它前缀树或者parents树。</p>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><blockquote>
+<blockquote>
+<p>蓝色表示转移边</p>
+</blockquote>
+<blockquote>
+<p>绿色表示后缀链接</p>
+</blockquote>
+<blockquote>
+<p>{}表示集合</p>
+</blockquote>
+<p>比如说字符串<code>aab</code>构建的后缀自动机（注意节点个数由于可能出现无法表示的点而不一定只有串长个，这里的例子没有出现）</p>
+<p>当然1号点（root）的后缀链接是连向NULL<img src="C:/Users/cqz15/Desktop/hexo%E5%A4%87%E4%BB%BD/source/_posts/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/WF.png" alt="举例"></p>
+</blockquote>
+<p>那么从1走到4的路径有$1-&gt;4|1-&gt;2-&gt;4|1-&gt;2-&gt;3-&gt;4$，显然能代表3个子串</p>
+<p>2号点的right集合为{1,2}，right集合可以通过Suffix Link推得到（当前这个节点代表的和它的后缀链接链到的）</p>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><p>我讲不清的呀</p>
+<p>丢参考链接跑</p>
+<p><a href="https://oi.men.ci/suffix-automaton-notes/" target="_blank" rel="noopener">menci的博客</a></p>
+<p><a href="https://wenku.baidu.com/view/fa02d3fff111f18582d05a81.html" target="_blank" rel="noopener">陈老师的讲稿</a></p>
+<p>具体思想就是在一个构建好的后缀自动机后面加入一个字符c。</p>
+<p>需要维护新加入节点和之前节点的trans和suffix_link。这个可以类比AC自动机。</p>
+<p>我们原来的有一个结束状态last。表示上次最后插入的那个状态。</p>
+<blockquote>
+<p>令之前的串为S。</p>
+<p>显然last能表示的S的一些后缀。</p>
+<p>S到last的路径并没有包含所有后缀，因为有一些后缀是前面出现过的，根据状态最简，所以有一些后缀之前已经出现过了。</p>
+<p>但是我们能够想到，最长的后缀一定是它能代表（包含）的。因为不可能有其他状态能表示。那么根据定义，last能表示的后缀是连续的一段。那么另外一些后缀根据定义，是last所指状态的后缀链接链向的。</p>
+<p>例如S为<code>abaaab</code></p>
+<p>比如说last能代表{<code>aaab</code>,<code>aab</code>}，那么last的后缀链接能连向一个节点v，v代表{<code>ab</code>,<code>b</code>}。</p>
+</blockquote>
+<p>所以说，只要顺着last的后缀链接，就能到达所有后缀，只要所有后缀都能链向新节点，如果能遍历所有后缀（包括空也算后缀），就能够完成操作。</p>
+<p>但问题在于，万一加入的一个字符使得前面某个后缀已经有转移状态了呢？</p>
+<p>假设当前处理到节点v，使得$trans[v][c] != NULL$ ，令$trans[v][c]$ = o</p>
+<blockquote>
+<p>还是通过一个实例来理解一下</p>
+<p><strong>强烈建议各位在纸上自己画一画，特别是把代表的字符串画出来</strong></p>
+<p>S = <code>ababb</code></p>
+<p>先插入一个节点代表root，使得其max=0，令last=root</p>
+<p>然后插入第一个节点，简称（1），其表示的子串为<code>a</code>，那么从root的<code>a</code>的转移便是1，此时1的max=1，同时1号点的Link指向root。令last=1</p>
+<p>然后再插入第二个点（2），注意到1是最后插入的，也就是1的后缀链接能走通所有后缀，那么我们让$trans[1][b] = 2$，表示从1通过在1的所有子串后面加上一个<code>b</code>就能组成2集合的一部分。此时（2）可以表示子串{<code>ab</code>}，那么顺着后缀链接到字符串<code>a</code>的一个后缀（不妨把空也看作后缀），那么从空到（2）一条转移边，意义同上一条转移边，此时2能代表{<code>b</code>,<code>ab</code>}，令2的Link指向root，因为（2）没能代表的子串只有{空}，令last=2</p>
+<p><img src="C:/Users/cqz15/Desktop/hexo%E5%A4%87%E4%BB%BD/source/_posts/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%9E%84%E9%80%A02.jpg" alt="构造2"></p>
+<p>同样的道理插入第三个点，令$trans[2][a] = 3$，$max[3] = max[2]+1 = 3$（至少一定要代表当前的整个前缀。</p>
+<p>那么我们再指向root，发现root已经有a的边的，强行把root的转移边指向3会引发一系列的惨案。我们注意新加入一个串还有一个子串没有处理{<code>a</code>}，但事实上，第一个节点代表的就是<code>a</code>（而1就正好是root的<code>a</code>转移所指向的点），出于最简状态，我们把3号点的Link指向1，发现什么事情都没有发生，还是满足后缀自动机的若干性质，于是令last = 3.</p>
+<p><img src="C:/Users/cqz15/Desktop/hexo%E5%A4%87%E4%BB%BD/source/_posts/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%9E%84%E9%80%A03.jpg" alt="构造3"></p>
+</blockquote>
+<p>好奇怪的操作？？？？那么我们加入下一个节点</p>
+<p>与第三个节点类似的操作，指向第一个被控制的指向的那个节点），发现竟然依旧满足性</p>
+<p><img src="C:/Users/cqz15/Desktop/hexo%E5%A4%87%E4%BB%BD/source/_posts/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%9E%84%E9%80%A04.jpg" alt="构造4"></p>
+<p>是不是所有情况都可以这么处理？不是。</p>
+<p>什么情况下可以这么处理？</p>
+<p>假设当前处理到节点v，使得$trans[v][c] != NULL$ ，令$trans[v][c]$ = o</p>
+<p>当$max[v]+1 = max[o]$的时候可以直接这么处理。为什么？</p>
+<p>注意到这时候我们缺的是v的所以代表的子串在最后面加上一个字符c，所能得到的那些子串的集合。而o正好包含了这些的集合，也就包含了当前缺少的长度最长的那个串T。由于每个节点所能表示的子串都是后缀关系，显然只要它不代表长度大于T的串即可，其等价于它最长的串的长度刚好是max[v]+1，也就是当前缺少的那个串。</p>
+<blockquote>
+<p>继续模拟这个过程，我们加入一个字符<code>b</code>注意此时有大问题出现了</p>
+<p>模拟4号节点插入5号节点，直到当前处理的v = root，因为root有一条b的转移边。</p>
+<p>注意到5号节点目前代表的集合是{<code>ababb</code>,<code>babb</code>,<code>abb</code>,<code>bb</code>}如果强行把5号节点的Link指向2号节点，必然导致<code>ab</code>并不是它的子串的后缀。那么问题有点麻烦，怎么办呢？新建一个点，让它只代表{<code>b</code>}，让2号点只代表{<code>ab</code>}，然后进行一系列的操作，使得满足Link的性质。操作完成之后是这样的。具体步骤就是把2号点的所有转移边复制到6号点，再让6号点的Link指向root，让2号点的Link指向6号，让5号点的Link指向6号。</p>
+<p><img src="C:/Users/cqz15/Desktop/hexo%E5%A4%87%E4%BB%BD/source/_posts/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%9E%84%E9%80%A05.jpg" alt="构造5"></p>
+<p>巧妙的数据结构！</p>
+</blockquote>
+<p>很多时候，我们需要得到right集合。具体操作是，一开始在所有结束位置标记一下，然后遍历整个parents树，将其子节点的right集合合并成其的right集合——考虑parents树的性质：一个节点的祖先代表的字符串一定是它代表的字符串的后缀。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>要记录哪些东西？</p>
+<p>一般需要记录max，记录trans（如果字符集大小很大，一般用map来存，否则直接数组存），下面用ch表示，还要记录suffixLink，下面用next表示。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SuffixAutomaton</span>&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> ch[<span class="number">26</span>],next,<span class="built_in">max</span>;</span><br><span class="line">	&#125;node[maxn];</span><br><span class="line">	<span class="keyword">int</span> start,last;</span><br><span class="line">	<span class="keyword">int</span> tot;</span><br><span class="line">	SuffixAutomaton()&#123;</span><br><span class="line">		tot = <span class="number">0</span>;</span><br><span class="line">		start = last = newnode(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> <span class="built_in">max</span>)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> x = ++tot;</span><br><span class="line">		node[x] . <span class="built_in">max</span> = <span class="built_in">max</span>;</span><br><span class="line">		mem(node[x].ch,<span class="number">0</span>);</span><br><span class="line">		node[x] . next = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span> x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">extend</span><span class="params">(<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> u = newnode(node[last] . <span class="built_in">max</span> + <span class="number">1</span>),v = last;</span><br><span class="line">		<span class="built_in">size</span>[u] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(;v &amp;&amp; !node[v].ch[c];v = node[v].next)</span><br><span class="line">			node[v].ch[c] = u;</span><br><span class="line">		<span class="keyword">if</span>(!v)&#123;</span><br><span class="line">			node[u] . next = start;</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span>(node[node[v].ch[c]].<span class="built_in">max</span> == node[v].<span class="built_in">max</span> + <span class="number">1</span>)&#123;</span><br><span class="line">			node[u].next = node[v].ch[c];</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">int</span> n = newnode(node[v].<span class="built_in">max</span>+<span class="number">1</span>),o = node[v].ch[c];</span><br><span class="line">			rep(k,<span class="number">0</span>,<span class="number">26</span>) node[n].ch[k] = node[o].ch[k];</span><br><span class="line">			node[n] . next = node[o].next;</span><br><span class="line">			node[o].next = node[u].next = n;</span><br><span class="line">			<span class="keyword">for</span>(;v &amp;&amp; node[v].ch[c] == o;v=node[v].next)</span><br><span class="line">				node[v].ch[c] = n;</span><br><span class="line">		&#125;</span><br><span class="line">		last = u;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;sam;</span><br></pre></td></tr></table></figure>
+
+<p>注：在字符集大小比较大的情况下可以把.ch[]换成map。</p>
+<p><strong>update：2018/9/8：</strong>现在习惯用T[]来表示node[]，用nxt[]表示ch[]，用link表示next。下面附上带有合并right集合的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SAM</span>&#123;</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> maxm = maxn * <span class="number">2</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> link,nxt[<span class="number">26</span>],<span class="built_in">max</span>;</span><br><span class="line">	&#125;T[maxm];</span><br><span class="line">	<span class="keyword">int</span> tot,start,last;</span><br><span class="line">	SAM()&#123;</span><br><span class="line">		tot = <span class="number">0</span>;</span><br><span class="line">		start = last = newnode(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">		++tot;</span><br><span class="line">		T[tot] . link = <span class="number">0</span>;</span><br><span class="line">		mem(T[tot].nxt,<span class="number">0</span>);</span><br><span class="line">		T[tot] . <span class="built_in">max</span> = x;</span><br><span class="line">		<span class="keyword">return</span> tot;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> tpos[maxm];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">extend</span><span class="params">(<span class="keyword">char</span> c,<span class="keyword">int</span> tmpp)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> u = newnode(T[last].<span class="built_in">max</span>+<span class="number">1</span>),v = last;</span><br><span class="line">		tpos[u] = tmpp;</span><br><span class="line">		<span class="keyword">for</span>(;v &amp;&amp; T[v].nxt[c] == <span class="number">0</span>;v = T[v].link)&#123;</span><br><span class="line">			T[v] . nxt[c] = u;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!v)&#123;</span><br><span class="line">			T[u] . link = start;</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span>(T[v].<span class="built_in">max</span>+<span class="number">1</span> == T[T[v].nxt[c]].<span class="built_in">max</span>)&#123;</span><br><span class="line">			T[u] . link = T[v] . nxt[c];</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">int</span> n = newnode(T[v].<span class="built_in">max</span> + <span class="number">1</span>),o = T[v].nxt[c];</span><br><span class="line">			rep(i,<span class="number">0</span>,<span class="number">26</span>) T[n] . nxt[i] = T[o] . nxt[i];</span><br><span class="line">			T[n] . link = T[o] . link;</span><br><span class="line">			T[o] . link = T[u] . link = n;</span><br><span class="line">			<span class="keyword">for</span>(;v &amp;&amp; T[v] . nxt[c] == o;v = T[v].link)</span><br><span class="line">				T[v] . nxt[c] = n;</span><br><span class="line">		&#125;</span><br><span class="line">		last = u;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[maxm];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> v : edge[u])&#123;</span><br><span class="line">			dfs(v);</span><br><span class="line">			root[u] = merge(root[u],root[v]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Rep(i,<span class="number">1</span>,tot) root[i] = <span class="number">0</span>;</span><br><span class="line">		Rep(i,<span class="number">1</span>,tot) <span class="keyword">if</span>(tpos[i])&#123;</span><br><span class="line">			insert(root[i],<span class="number">1</span>,n,tpos[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		Rep(i,<span class="number">2</span>,tot)&#123;</span><br><span class="line">			edge[T[i] . link] . push_back(i);</span><br><span class="line">		&#125;</span><br><span class="line">		dfs(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;sam;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><p>$O(n * alpha)$，$alpha$表示字符集大小。</p>
+<p>证明这种东西，我这么菜完全不会。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><h4 id="parents树"><a href="#parents树" class="headerlink" title="parents树"></a>parents树</h4><p>一个节点的parents树上的祖先节点所代表的字符串都是这个节点所代表的字符串的后缀。</p>
+<p>换句话说，一个节点的子树中的字符串都是这个节点的字符串在前面加上若干字符得到的。</p>
+<p><strong>字符串S的反串的SAM里面的parents树就是S的后缀树。</strong>这个通过理解parents树的性质很容易理解。</p>
+<p>多出来的节点是分叉的时候的显式节点，本来就有的是叶节点。然后可以利用<strong>后缀树的LCA为两个后缀的LCP</strong>来搞事情。</p>
+<h4 id="right集合（endpos"><a href="#right集合（endpos" class="headerlink" title="right集合（endpos)"></a>right集合（endpos)</h4><p>就是这个节点所代表的字符串在原串中出现的位置的结束位置的集合。</p>
+<p>得到SAM后，我们可以得到S串的所有前缀出现的结束位置，容易发现S的所有前缀的后缀就是S的所有子串，而对于字符串S，它的后缀就是其parents树上的祖先，所以我们可以先在所有字符串S的前缀的结束位置打上一个标记，然后遍历整个树，用线段树合并可以得到right集合。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="codeforces1037H-Security"><a href="#codeforces1037H-Security" class="headerlink" title="codeforces1037H. Security"></a>codeforces1037H. Security</h4><p><strong>update：2018/9/8</strong></p>
+<p><strong>题意：</strong></p>
+<p>给你一个长度不超过1e5字符串S，接下来m个询问，每个询问给出L,R,T，T是一个总长度不超过2e5的字符串，让你取出S在区间[L,R]的部分得到一个子串SS，然后找SS的子串中字典序严格比T大的最小的字符串，如果不存在输出-1。</p>
+<p><strong>做法：</strong></p>
+<p>如果对于一个固定的前缀，那么后面一定是加上一个字符（多个字符显然更劣）。<br>对于每一个，我们枚举前缀，然后枚举新的字符（满足变成的字典序要比原来的大），然后判断区间是否存在某个字符串。<br>这是一个经典的SAM问题。<br>我们先建立出后缀自动机，然后线段树合并爆出right集合，然后找到代表这个字符串的节点，并在其查询right中查询是否存在一个字符串出现在区间内。<br>处理部分时间复杂度 $O(lenT * 26 * log(lenS))$<br>注意到我们只需要看每一个位置的下一个即可，我们考虑把right集合作一个转化，转化成下一个字符是否可以是某个值。<br>然后继续爆”right集合”，这样就可以得到一个前缀在字符串的某个区间能能否加某个字符，注意到这是可以状态压缩的，直接$2^{26}$存每个位置的是否可以即可。<br>这样枚举下一个字符填什么，就可以$O(1)$判断了。<br>处理部分时间复杂度 $O(lenT * (26 + log lenS))$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vi;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Rep(i,a,b) for(register int i=(a);i&lt;=int(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Dep(i,a,b) for(register int i=(a);i&gt;=int(b);--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(register int i=(a);i&lt;int(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(x,v) memset(x,v,sizeof(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> se second</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc getchar</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pc putchar</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">rd</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ll x=<span class="number">0</span>,f=<span class="number">1</span>;<span class="keyword">char</span> c=gc();</span><br><span class="line">    <span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c=gc())<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);c=gc())x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(c^<span class="number">48</span>);</span><br><span class="line">    <span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(ll x)</span></span>&#123;<span class="keyword">if</span>(x&lt;<span class="number">0</span>)x=-x,pc(<span class="string">'-'</span>);<span class="keyword">if</span>(x&gt;=<span class="number">10</span>)<span class="built_in">write</span>(x/<span class="number">10</span>);<span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">'0'</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writeln</span><span class="params">(ll x)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">puts</span>(<span class="string">""</span>);&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e5</span>+<span class="number">233</span>;</span><br><span class="line"><span class="keyword">namespace</span> SegmentTree&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> maxm = maxn * <span class="number">60</span>;</span><br><span class="line">	<span class="keyword">int</span> lc[maxm],rc[maxm],T[maxm],tot=<span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> &amp;o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> x,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!o) o = ++tot,T[o] = <span class="number">0</span>;</span><br><span class="line">		T[o] |= v;</span><br><span class="line">		<span class="keyword">if</span>(l==r) <span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(x &lt;= mid) insert(lc[o],l,mid,x,v); <span class="keyword">else</span></span><br><span class="line">					 insert(rc[o],mid+<span class="number">1</span>,r,x,v);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!o) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(l==x &amp;&amp; r==y) <span class="keyword">return</span> T[o];</span><br><span class="line">		<span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(y &lt;= mid) <span class="keyword">return</span> query(lc[o],l,mid,x,y); <span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span>(mid+<span class="number">1</span>&lt;=x) <span class="keyword">return</span> query(rc[o],mid+<span class="number">1</span>,r,x,y); <span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> query(lc[o],l,mid,x,mid) | query(rc[o],mid+<span class="number">1</span>,r,mid+<span class="number">1</span>,y);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!x || !y) <span class="keyword">return</span> x + y;</span><br><span class="line">		<span class="keyword">int</span> z = ++tot;</span><br><span class="line">		T[z] = T[x] | T[y];</span><br><span class="line">		lc[z] = merge(lc[x],lc[y]);</span><br><span class="line">		rc[z] = merge(rc[x],rc[y]);</span><br><span class="line">		<span class="keyword">return</span> z;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> SegmentTree::insert;</span><br><span class="line"><span class="keyword">using</span> SegmentTree::merge;</span><br><span class="line"><span class="keyword">using</span> SegmentTree::query;</span><br><span class="line"><span class="keyword">int</span> root[maxn*<span class="number">2</span>],n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SAM</span>&#123;</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> maxm = maxn * <span class="number">2</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> link,nxt[<span class="number">26</span>],<span class="built_in">max</span>;</span><br><span class="line">	&#125;T[maxm];</span><br><span class="line">	<span class="keyword">int</span> tot,start,last;</span><br><span class="line">	SAM()&#123;</span><br><span class="line">		tot = <span class="number">0</span>;</span><br><span class="line">		start = last = newnode(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">newnode</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">		++tot;</span><br><span class="line">		T[tot] . link = <span class="number">0</span>;</span><br><span class="line">		mem(T[tot].nxt,<span class="number">0</span>);</span><br><span class="line">		T[tot] . <span class="built_in">max</span> = x;</span><br><span class="line">		<span class="keyword">return</span> tot;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> tpos[maxm],vpos[maxm];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">extend</span><span class="params">(<span class="keyword">char</span> c,<span class="keyword">int</span> flag)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> u = newnode(T[last].<span class="built_in">max</span>+<span class="number">1</span>),v = last;</span><br><span class="line">		tpos[v] = flag;vpos[v] = c;</span><br><span class="line">		<span class="keyword">for</span>(;v &amp;&amp; T[v].nxt[c] == <span class="number">0</span>;v = T[v].link)&#123;</span><br><span class="line">			T[v] . nxt[c] = u;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!v)&#123;</span><br><span class="line">			T[u] . link = start;</span><br><span class="line">		&#125; <span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span>(T[v].<span class="built_in">max</span>+<span class="number">1</span> == T[T[v].nxt[c]].<span class="built_in">max</span>)&#123;</span><br><span class="line">			T[u] . link = T[v] . nxt[c];</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">int</span> n = newnode(T[v].<span class="built_in">max</span> + <span class="number">1</span>),o = T[v].nxt[c];</span><br><span class="line">			rep(i,<span class="number">0</span>,<span class="number">26</span>) T[n] . nxt[i] = T[o] . nxt[i];</span><br><span class="line">			T[n] . link = T[o] . link;</span><br><span class="line">			T[o] . link = T[u] . link = n;</span><br><span class="line">			<span class="keyword">for</span>(;v &amp;&amp; T[v] . nxt[c] == o;v = T[v].link)</span><br><span class="line">				T[v] . nxt[c] = n;</span><br><span class="line">		&#125;</span><br><span class="line">		last = u;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[maxm];</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">auto</span> v : edge[u])&#123;</span><br><span class="line">			dfs(v);</span><br><span class="line">			root[u] = merge(root[u],root[v]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Rep(i,<span class="number">1</span>,tot) root[i] = <span class="number">0</span>;</span><br><span class="line">		Rep(i,<span class="number">1</span>,tot) <span class="keyword">if</span>(tpos[i])&#123;</span><br><span class="line">			insert(root[i],<span class="number">1</span>,n,tpos[i],<span class="number">1</span>&lt;&lt;vpos[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		Rep(i,<span class="number">2</span>,tot)&#123;</span><br><span class="line">			edge[T[i] . link] . push_back(i);</span><br><span class="line">		&#125;</span><br><span class="line">		dfs(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;sam;</span><br><span class="line"><span class="keyword">char</span> S[maxn],T[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,S+<span class="number">1</span>);</span><br><span class="line">	n = <span class="built_in">strlen</span>(S+<span class="number">1</span>);</span><br><span class="line">	Rep(i,<span class="number">1</span>,n) sam.extend(S[i]-<span class="string">'a'</span>,i);</span><br><span class="line">	sam.init();</span><br><span class="line">	<span class="keyword">int</span> Case = rd();</span><br><span class="line">	<span class="keyword">while</span>(Case--)&#123;</span><br><span class="line">		<span class="keyword">int</span> l = rd(),r = rd();</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>,T+<span class="number">1</span>);</span><br><span class="line">		T[<span class="built_in">strlen</span>(T+<span class="number">1</span>) + <span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">		T[<span class="built_in">strlen</span>(T+<span class="number">1</span>) + <span class="number">1</span>] = <span class="string">'a'</span><span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> p1=<span class="number">-1</span>,p2=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> u = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;T[i] &amp;&amp; u;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> t = query(root[u],<span class="number">1</span>,n,l+i<span class="number">-1</span>,r),tmp = T[i] - <span class="string">'a'</span> + <span class="number">1</span>;</span><br><span class="line">			rep(j,tmp,<span class="number">26</span>) <span class="keyword">if</span> (t &gt;&gt; j &amp; <span class="number">1</span>)&#123;</span><br><span class="line">				p1 = i,p2 = j;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(T[i] &gt;= <span class="string">'a'</span>) u = sam.T[u].nxt[T[i]-<span class="string">'a'</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p1==<span class="number">-1</span>)&#123;</span><br><span class="line">			<span class="built_in">puts</span>(<span class="string">"-1"</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span>&#123;</span><br><span class="line">			rep(i,<span class="number">1</span>,p1)pc(T[i]);pc(<span class="string">'a'</span>+p2);<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Suffix-automaton-notes/">后缀自动机学习笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">emoairx</a></p>
+        <p><span>发布时间:</span>2019-11-13, 06:46:48</p>
+        <p><span>最后更新:</span>2019-11-09, 18:24:32</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Suffix-automaton-notes/" title="后缀自动机学习笔记">http://emoairx.top/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Suffix-automaton-notes/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Suffix-automaton-notes/　　作者: emoairx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/NOI2018%E5%90%8C%E6%AD%A5%E8%B5%9B%E4%BD%93%E9%AA%8C%E8%AE%B0/">
+                    NOI2018同步赛体验记
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/">
+                    生成函数学习笔记
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DAWG"><span class="toc-number">1.1.</span> <span class="toc-text">DAWG</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-number">2.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、字符串的子串。"><span class="toc-number">2.1.</span> <span class="toc-text">1、字符串的子串。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、max和min"><span class="toc-number">2.2.</span> <span class="toc-text">2、max和min</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、-right-集合-endpos"><span class="toc-number">2.3.</span> <span class="toc-text">3、$right$集合($endpos$)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、转移边"><span class="toc-number">2.4.</span> <span class="toc-text">4、转移边</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、后缀链接-Suffix-Link-和parents树"><span class="toc-number">2.5.</span> <span class="toc-text">5、后缀链接(Suffix Link)和parents树</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#举例"><span class="toc-number">3.</span> <span class="toc-text">举例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造"><span class="toc-number">4.</span> <span class="toc-text">构造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">5.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂度"><span class="toc-number">6.</span> <span class="toc-text">复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">7.</span> <span class="toc-text">性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#parents树"><span class="toc-number">7.1.</span> <span class="toc-text">parents树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#right集合（endpos"><span class="toc-number">7.2.</span> <span class="toc-text">right集合（endpos)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例题"><span class="toc-number">8.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#codeforces1037H-Security"><span class="toc-number">8.1.</span> <span class="toc-text">codeforces1037H. Security</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"后缀自动机学习笔记　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+
+  
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+    
+new Valine({
+    el: '#vcomment',
+    notify: notify,
+    verify: verify,
+    app_id: "r2V9Iy6jfKDJtlRcYUpNHi3p-gzGzoHsz",
+    app_key: "BMVmp2ga1G0YpmWvVw1pESHw",
+    placeholder: "Input here.",
+    avatar:"mm"
+});
+</script>
+    </section>
+  
+
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/NOI2018%E5%90%8C%E6%AD%A5%E8%B5%9B%E4%BD%93%E9%AA%8C%E8%AE%B0/" title="上一篇: NOI2018同步赛体验记">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/" title="下一篇: 生成函数学习笔记">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/">ZJOI2019退役录（简略OI回忆录？）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2018%20Day1/">ZJOI2018 Day1划水记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/NOIP2017%E6%BB%9A%E7%B2%97%E8%AE%B0/">NOIP2017滚粗记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/NOI2018%E5%90%8C%E6%AD%A5%E8%B5%9B%E4%BD%93%E9%AA%8C%E8%AE%B0/">NOI2018同步赛体验记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Suffix-automaton-notes/">后缀自动机学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Generating-function-notes/">生成函数学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/dsu%20on%20tree/">dsu on tree</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/hihoCoder1252%20Kejin%20Game/hihoCoder1252%20Kejin%20Game/">hihoCoder1252 Kejin Game</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/">线性规划与网络流24题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/UOJ349%20%5BWC2018%5D%E5%8D%B3%E6%97%B6%E6%88%98%E7%95%A5/">UOJ349 [WC2018]即时战略</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/readme/">readme</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/LOJ2335%E3%80%8CJOI%2020162017%20%E5%86%B3%E8%B5%9B%E3%80%8D%E8%B6%B3%E7%90%83/">LOJ2335「JOI 20162017 决赛」足球</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/HDU4685%20Prince%20and%20Princess/">HDU4685 Prince and Princess</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/HDU4372&&codeforces960G/">HDU4372&&codeforces960G</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/codeforces976F%20Minimal%20k-covering/">codeforces976F Minimal k-covering</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/codeforces920-Edu37/">codeforces920-Edu37</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/codeforces915-Edu36/">codeforces915-Edu36</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/codeforces914/">codeforces915</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/codeforces913%20Hello2018/">codeforces913-Hello2018</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/codeforces674D/">codeforces674D Bearish Fanpages</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ5093%20%E5%9B%BE%E7%9A%84%E4%BB%B7%E5%80%BC/">BZOJ5093 图的价值</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ4562%20%5BHaoi2016%5D%E9%A3%9F%E7%89%A9%E9%93%BE/">BZOJ1050 [HAOI2006]旅行comf</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ4025%20%E4%BA%8C%E5%88%86%E5%9B%BE/">BZOJ4025 二分图</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ3784%20%E6%A0%91%E4%B8%8A%E7%9A%84%E8%B7%AF%E5%BE%84/">BZOJ3784 树上的路径</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ3571%20%5BHnoi2014%5D%E7%94%BB%E6%A1%86/">BZOJ3571 [Hnoi2014]画框</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ3438%20%E5%B0%8FM%E7%9A%84%E4%BD%9C%E7%89%A9/">BZOJ3438 小M的作物</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ3118%20Orz%20the%20MST/">BZOJ3118 Orz the MST</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ2815%20%5BZJOI2012%5D%E7%81%BE%E9%9A%BE/">BZOJ2815 [ZJOI2012]灾难</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1937%20%5BShoi2004%5DMst%20%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/">BZOJ1937 [Shoi2004]Mst 最小生成树</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1834%20%5BZJOI2010%5Dnetwork%20%E7%BD%91%E7%BB%9C%E6%89%A9%E5%AE%B9/">BZOJ1834 [ZJOI2010]network 网络扩容</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1497%20%5BNOI2006%5D%E6%9C%80%E5%A4%A7%E8%8E%B7%E5%88%A9/">BZOJ1497 [NOI2006]最大获利</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1412%20%5BZJOI2009%5D%E7%8B%BC%E5%92%8C%E7%BE%8A%E7%9A%84%E6%95%85%E4%BA%8B/">BZOJ1412 [ZJOI2009]狼和羊的故事</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1337%20%E6%9C%80%E5%B0%8F%E5%9C%86%E8%A6%86%E7%9B%96/">BZOJ1337 最小圆覆盖</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1095%5BZJOI2007%5DHide%20%E6%8D%89%E8%BF%B7%E8%97%8F/">BZOJ1095[ZJOI2007]Hide 捉迷藏</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1061%20%5BNoi2008%5D%E5%BF%97%E6%84%BF%E8%80%85%E6%8B%9B%E5%8B%9F/">BZOJ1061 [Noi2008]志愿者招募</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1050%20%5BHAOI2006%5D%E6%97%85%E8%A1%8Ccomf/">BZOJ1050 [HAOI2006]旅行comf</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOj1049%20%5BHAOI2006%5D%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97/">BZOj1049 [HAOI2006]数字序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1048%20%5BHAOI2007%5D%E5%88%86%E5%89%B2%E7%9F%A9%E9%98%B5/">BZOJ1048 [HAOI2007]分割矩阵</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1046%20%5BHAOI2007%5D%E4%B8%8A%E5%8D%87%E5%BA%8F%E5%88%97/">BZOJ1046 [HAOI2007]上升序列</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1045%20%5BHAOI2008%5D%E7%B3%96%E6%9E%9C%E4%BC%A0%E9%80%92/">BZOJ1045 [HAOI2008] 糖果传递</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1044%20%5BHAOI2008%5D%E6%9C%A8%E6%A3%8D%E5%88%86%E5%89%B2/">BZOJ1044 [HAOI2008]木棍分割</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1043%20%5BHAOI2008%5D%E4%B8%8B%E8%90%BD%E7%9A%84%E5%9C%86%E7%9B%98/">BZOJ1043 [HAOI2008]下落的圆盘</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1042%20%5BHAOI2008%5D%E7%A1%AC%E5%B8%81%E8%B4%AD%E7%89%A9/">BZOJ1042 [HAOI2008]硬币购物</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1041%20%5BHAOI2008%5D%E5%9C%86%E4%B8%8A%E7%9A%84%E6%95%B4%E7%82%B9/">BZOJ1041 [HAOI2008]圆上的整点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/BZOJ1040%20%5BZJOI2008%5D%E9%AA%91%E5%A3%AB/">BZOJ1040 [ZJOI2008]骑士</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/AGC024%20A-E%E9%A2%98%E8%A7%A3/">AGC024 A-E题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/1010%20%5BHNOI2008%5D%E7%8E%A9%E5%85%B7%E8%A3%85%E7%AE%B1toy/">BZOj1010 [HNOI2008]玩具装箱toy</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/13/1001%20%5BBeiJing2006%5D%E7%8B%BC%E6%8A%93%E5%85%94%E5%AD%90/">BZOJ1001 [BeiJing2006]狼抓兔子</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2019 emoairx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="https://cdnjs.loli.net/ajax/libs/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 1;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
