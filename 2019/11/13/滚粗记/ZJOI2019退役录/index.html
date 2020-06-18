@@ -15,15 +15,15 @@
 
 
 
-<meta name="description" content="题意​    有一颗技能树，每个技能有一些“先修技能”，必须把这些“先修技能”全部点完才能学习这个技能，这个技能树是个DAG。由于是个氪金游戏，点某个技能需要一些花费，作为rmb玩家，可以把技能树的某条边去掉，也就是说某个技能少了一个先修技能，当然这也需要花费。还可以直接花费金钱学习某个技能而无视其先修技能。问：在初始什么技能都没有的情况下，要点某个给定的技能需要多少钱？">
-<meta name="keywords" content="网络流,hihoCoder">
+<meta name="description" content="本来想写些正经的游记，或许还能分析一下题目吧。 但毕竟发现自己高一的OI生涯已经结束了。  &amp;lt;大概是有点简略回忆录，反正也没什么人会看就是了&amp;gt;">
+<meta name="keywords" content="游记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hihoCoder1252 Kejin Game">
-<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;13&#x2F;hihoCoder1252%20Kejin%20Game&#x2F;hihoCoder1252%20Kejin%20Game&#x2F;index.html">
+<meta property="og:title" content="ZJOI2019赛后感">
+<meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;13&#x2F;%E6%BB%9A%E7%B2%97%E8%AE%B0&#x2F;ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95&#x2F;index.html">
 <meta property="og:site_name" content="Wzp Ak King">
-<meta property="og:description" content="题意​    有一颗技能树，每个技能有一些“先修技能”，必须把这些“先修技能”全部点完才能学习这个技能，这个技能树是个DAG。由于是个氪金游戏，点某个技能需要一些花费，作为rmb玩家，可以把技能树的某条边去掉，也就是说某个技能少了一个先修技能，当然这也需要花费。还可以直接花费金钱学习某个技能而无视其先修技能。问：在初始什么技能都没有的情况下，要点某个给定的技能需要多少钱？">
+<meta property="og:description" content="本来想写些正经的游记，或许还能分析一下题目吧。 但毕竟发现自己高一的OI生涯已经结束了。  &amp;lt;大概是有点简略回忆录，反正也没什么人会看就是了&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-25T12:18:44.000Z">
+<meta property="og:updated_time" content="2020-06-18T14:06:26.000Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -56,7 +56,7 @@
 <link href="https://cdnjs.loli.net/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>hihoCoder1252 Kejin Game | Wzp Ak King</title>
+<title>ZJOI2019赛后感 | Wzp Ak King</title>
 
 <script src="https://cdnjs.loli.net/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -216,11 +216,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-hihoCoder1252 Kejin Game/hihoCoder1252 Kejin Game" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-滚粗记/ZJOI2019退役录" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/11/13/hihoCoder1252%20Kejin%20Game/hihoCoder1252%20Kejin%20Game/" class="article-date">
-      <time datetime="2019-11-12T22:46:48.200Z" itemprop="datePublished">2019-11-13</time>
+      <a href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/" class="article-date">
+      <time datetime="2019-11-12T22:46:48.740Z" itemprop="datePublished">2019-11-13</time>
 </a>
 
 
@@ -235,7 +235,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      hihoCoder1252 Kejin Game
+      ZJOI2019赛后感
     </h1>
   
 
@@ -246,7 +246,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hihoCoder/" rel="tag">hihoCoder</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag">网络流</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%B8%E8%AE%B0/" rel="tag">游记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -256,19 +256,44 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>​    有一颗技能树，每个技能有一些“先修技能”，必须把这些“先修技能”全部点完才能学习这个技能，这个技能树是个DAG。由于是个氪金游戏，点某个技能需要一些花费，作为rmb玩家，可以把技能树的某条边去掉，也就是说某个技能少了一个先修技能，当然这也需要花费。还可以直接花费金钱学习某个技能而无视其先修技能。<br>问：在初始什么技能都没有的情况下，要点某个给定的技能需要多少钱？</p>
+        <p>本来想写些正经的游记，或许还能分析一下题目吧。</p>
+<p>但毕竟发现自己高一的OI生涯已经结束了。</p>
+<p> &lt;大概是有点<strong>简略回忆录</strong>，反正也没什么人会看就是了&gt;</p>
 <a id="more"></a>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>​    用最小割的思想来做。</p>
-<p>​    考虑重新构图，把每个点拆成两个点$i$和$i’$，对于直接学习某个技能，我们在$i$到$i’$之间连一条容量为其花费的边。这样只要割去这条边，左边和右边直接断开。</p>
-<p>​    我们从源点S向每个点连一条容量为普通学习费用的边。</p>
-<p>​    并且我们对于原来的一条边(u-&gt;v)，我们从$u’$连到$v$这样一条容量为消灭这条边的费用的边。</p>
-<p>​    最后我们从要求的$s’$向T连一条$inf$的边。</p>
-<p>​    注意到这里的每一条割都意味着一种学习方法。</p>
-<p>​    由于没有从S直接连到$i’$的边，意味着到$i’$，也就是修i的技能，只有前面都断了，那么前面断了可以是这个点直接学习，也可以是之前的边满足都割去，然后再割去S到$i$的普通学习的边。</p>
-<p>​    那么只要求最小割（最大流），就可以得到花费最小的学习方法了。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Hello Wolrd</span></span><br><span class="line"><span class="comment">//There is Special Pig Jiong in the world.</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bitset&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pc putchar</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RG register</span></span><br><span class="line"><span class="keyword">char</span> __wzp[<span class="number">1</span>&lt;&lt;<span class="number">15</span>|<span class="number">1</span>],*__S=__wzp+<span class="number">32768</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> LOCAL </span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> gc() getchar()</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> gc() (__S&gt;=__wzp+32768?(__wzp[fread(__wzp,sizeof(char),1&lt;&lt;15,stdin)]=EOF),*((__S=__wzp)++):*(__S++))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	RG ll x=<span class="number">0</span>,f=<span class="number">1</span>;RG <span class="keyword">char</span> c=gc();</span><br><span class="line">	<span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c=gc())<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);c=gc())x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(c^<span class="number">48</span>);</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> oo = <span class="number">0x3f3f3f3f</span>,inf = oo;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mem(x,v) memset(x,v,sizeof(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> wait system(<span class="meta-string">"pause"</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,a,b) for(RG int i=(a);i&lt;(b);++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> file(x) &#123;freopen(#x<span class="meta-string">".in"</span>,<span class="meta-string">"r"</span>,stdin);freopen(#x<span class="meta-string">".out"</span>,<span class="meta-string">"w"</span>,stdout);&#125;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> writeln(x) printf(<span class="meta-string">"%d\n"</span>,x);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 505*2+233</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M 100990 + N * 2 + 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> T n+n+1</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt,cap;</span><br><span class="line">	Edge()&#123;&#125;</span><br><span class="line">	Edge(<span class="keyword">int</span> to,<span class="keyword">int</span> nxt,<span class="keyword">int</span> cap):to(to),nxt(nxt),cap(cap)&#123;&#125;</span><br><span class="line">&#125;edge[M*<span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> first[N],nume,cur[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Addedge</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">	edge[nume] = Edge(b,first[a],c);first[a] = nume++;</span><br><span class="line">	edge[nume] = Edge(a,first[b],<span class="number">0</span>);first[b] = nume++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> q[N],dis[N],n;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">bfs</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> v,front,rear;mem(dis,<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(front=rear=<span class="number">0</span>,dis[q[rear++]=T]=<span class="number">1</span>;front&lt;rear;)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> u=q[front++],e=first[u];~e;e=edge[e].nxt)</span><br><span class="line">			<span class="keyword">if</span>(edge[e^<span class="number">1</span>].cap &amp;&amp; !~dis[v=edge[e].to])dis[q[rear++]=v]=dis[u]+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> dis[S]!=<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> flow)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(u==T)<span class="keyword">return</span> flow;</span><br><span class="line">	<span class="keyword">int</span> used = <span class="number">0</span>,d,v;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> &amp;e=cur[u];~e;e=edge[e].nxt)&#123;</span><br><span class="line">		<span class="keyword">if</span>(edge[e].cap &amp;&amp; dis[v=edge[e].to]==dis[u]<span class="number">-1</span> &amp;&amp; (d = dfs(v,<span class="built_in">min</span>(flow-used,edge[e].cap))))</span><br><span class="line">			edge[e].cap -= d,edge[e^<span class="number">1</span>].cap += d,used += d;</span><br><span class="line">		<span class="keyword">if</span>(used == flow) <span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!used)dis[u]=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">return</span> used;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dinic</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(;bfs();ans+=dfs(S,inf))</span><br><span class="line">		rep(i,S,T+<span class="number">1</span>) cur[i] = first[i];</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> m,s;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> kase = <span class="built_in">read</span>();</span><br><span class="line">	<span class="keyword">while</span>(kase--)&#123;</span><br><span class="line">		mem(first,<span class="number">-1</span>);nume = <span class="number">0</span>;</span><br><span class="line">		n = <span class="built_in">read</span>(),m = <span class="built_in">read</span>(),s = <span class="built_in">read</span>();</span><br><span class="line">		<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">			<span class="keyword">int</span> a = <span class="built_in">read</span>(),b = <span class="built_in">read</span>(),c = <span class="built_in">read</span>();</span><br><span class="line">			Addedge(a+n,b,c);<span class="comment">//氪一条边 </span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> x = <span class="built_in">read</span>();</span><br><span class="line">			Addedge(S,i,x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> x = <span class="built_in">read</span>();</span><br><span class="line">			Addedge(i,n+i,x);</span><br><span class="line">		&#125;</span><br><span class="line">		Addedge(s+n,T,inf);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dinic());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>鉴于语文水平低下，这大概只是篇流水账罢了。</p>
+<h4 id="按正论说回忆录得有个开头，但哪些年代久远的，沉浸在记忆里的也早融化了，便也得不到个开头。"><a href="#按正论说回忆录得有个开头，但哪些年代久远的，沉浸在记忆里的也早融化了，便也得不到个开头。" class="headerlink" title="按正论说回忆录得有个开头，但哪些年代久远的，沉浸在记忆里的也早融化了，便也得不到个开头。"></a>按正论说回忆录得有个开头，但哪些年代久远的，沉浸在记忆里的也早融化了，便也得不到个开头。</h4><p>​    他自诩为emoairx，若要问他为何如此称呼，他大抵会说：“这是我曾经用时间当随机种子，随机出来的字符串，当时取了前6位emoair，只是注册账号的时候发现已经有重复了，便加了一个x”。或许他是想致敬WJMZBMR，但他不配这么做——果然这应该叫做抄袭吗？</p>
+<p>&emsp;学OI是在四年级，这不算晚，或许还算有些早，只是前些年都在浪，第一年学会了分支语句，第二年学会了循环语句。</p>
+<p>&emsp;若是问他那时候他为什么学要OI，他大抵会说：“那时候我玩war3，玩msdzls，玩pvz，当时看着这些精美的游戏，总想着写一点外挂出来，把自己的血量无限，金币无限……也许还可以自己写一个游戏……我当时用仅有的知识写一些诸位看来可笑的游戏，像是猜数啊，石头剪刀布啊，但当时感觉自己很充实。”</p>
+<p>&emsp;他说起那些有些，还有些苦笑，他说一开始是用pascal写的，界面不太美观，后来便自学了VB，写了一些贪吃蛇，2048，俄罗斯方块之类的游戏。</p>
+<p>&emsp;据他当时的设想，他打算把这些小游戏做一个闯关游戏集合，每一关都是一个小游戏，只是后来因为一些原因做了七八个之后就咕了。</p>
+<p>&emsp;再说OI上，他其实六年级就知道有NOIP这个赛事，只是初一才报名。</p>
+<p>&emsp;倒是报名了也没什么用途，他当年初赛恰好卡线，复赛第三题不知道乘法分配律，第四题不会贪心算法，而后来第三题又因为数组开太大，MLE了，便拿了240分，当时普及二等线是250，又没有三等奖，便愉快地毫无收获。</p>
+<p>&emsp;那时候已经是初中了，他在他们县里一个还不错的初中上学，那时候和他一起学OI的人确实也有一些，当时他们学校有两个初一就一等的，一个是后来鼎鼎大名的周指导，还有一个是初中三年稳居年段第一的某陈姓同学——后来也便不知道了。</p>
+<p>&emsp;初中的时候，他文化课似乎还不错，他有时候在中午去机房颓废，有时候周指导和陈同学也在，他便也会向他们请教一下文化课作业。若是问他怎么进的学校机房的，他大抵会说：“有时候是老师在，门便是开的，有时候老师不在，便撬窗，我们学校的窗户不太紧，一开始拿个笔就能撬开，时间长了直接用手往里面摁就能把窗户撬开了，然后让个人进去，把后门开了——前面是有锁的，是开不了的。到时候再锁上后门，从窗户里爬出来……”</p>
+<p>&emsp;到了第二年联赛，他又卡线进了复赛，他很快做出了前两题，看第三题的时候要读入很多行数，他马上就发现直接开一个邻接矩阵来存是会超出内存限制的。他考场上想到了一个把所有数存在一个长度为n的数组里面，然后记录一下每一段是从数组的那个位置开始持续多少。当时他把这个称作“队列数组”。——事实上，这是一个C++的vector，或者链表就可以解决的简单问题。那题的第四题，他没有发现相同的数字答案是一样的，写了一个简单的暴力，又稍微优化了一下。那年第四题他过了样例，但获得了0分的成绩，似乎是有一个地方判错了。当年的分数线是300分，他也正好是300，便卡线普及一等。</p>
+<p>&emsp;那时候周指导和陈同学依旧吊打他，他也习以为常了。</p>
+<p>&emsp;说emoairx同学倒也是有胆量，周指导和陈同学，以及同一个地区的徐同学打算初三参加提高组，emoairx同学也凑了上去，打算转C++，然后开始学提高组算法。说到那一年，emoairx充满了怀念。</p>
+<p>&emsp;“我记得那时候我是真的很认真，学校里文化课作业很多，我常常要做到十二点，但我还是会挤出时间学OI。我记得我花了好几天时间调出一道splay题，草稿纸上画满了平衡树。我记得有时候周指导，陈同学会和我一起探讨题目，东南的太阳光照在教室前的走廊上，照在指导的脸上，照在被我们涂画的草稿纸上。我记得学校运动会的时候，我们在机房里研究发现了排序加去重可以做到离散化——当时我们把它叫做哈希，并持续了许多时间。我记得陈同学教我树状数组，周指导教我线段树……有一段时间和xza一起做CF……曾经还写过写<a href="[https://szoorz.github.io/2017/08/19/OI/Codeforces/%E9%A2%98%E8%A7%A3%EF%BC%9A2017%E6%9A%91%E5%81%87/codeforces2017%E6%9A%91%E5%81%87/](https://szoorz.github.io/2017/08/19/OI/Codeforces/题解：2017暑假/codeforces2017暑假/)">博客</a>。那时候做题真的有多认真自己都想不到。两年了呀……“</p>
+<p>&emsp;我听着emoairx说，心中也挺有感触——毕竟，这是青春啊。</p>
+<p>&emsp;17年的联赛，emoairx同学获得了410分，尽管他奋力挣扎最终失败。但他已经很满意了，他觉得这个分数已经对得起他的付出了。不出所料的，周指导，陈同学和徐同学都吊打了他。</p>
+<p>&emsp;那之后，他想去徐同学想去的，当地有名的绍兴一中——这个名词还是他初二下才知道的，参加集训，绍一似乎乐于接受emoairx同学，emoairx同学便随着周指导，陈同学，徐同学在绍一集训了一段时间。</p>
+<p>&emsp;然而，因为一些奇怪的原因，于是emoairx同学又被赶回了学校，他当时有一些生无可恋，记得还因为被强制要求参加期末考试而咕掉了pkuwc。</p>
+<p>&emsp;那之后他参加了省选，其实当年他的水平完全被吊起来锤，他只是来旅游的。事实上一试他获得了全场最低分——0分。</p>
+<p>&emsp;emoairx同学后来还是去了绍兴一中，陈同学因为高超的文化课技巧选择了柯桥中学，似乎处于半退役状态，今年省选也没看到他人，周指导去了学车中学，这之后的事情大家都知道了，也不再提。当年我们三个一起游戏，一起奋斗如今分割三地，很少再联系了。</p>
+<p>&emsp;到了高中，emoairx同学渐渐地颓废了起来。他先后接触了动画片，galgame，小说……日渐沉迷，不复过去的努力。</p>
+<p>&emsp;不出所料，今年的省选他退役啦。</p>
+<p>&emsp;你若是问他，他今年省选怎么回事，他大抵会说：“我开场刚T2，先写了一个4个状态存它和它祖先是否被访问到的n^2 log n的暴力，发现可以用矩阵乘法优化，时间复杂度是n log n * 4^3的，当时我想都没想，直接写了一发，发现本机要跑9s，这时候差不多过去了两个多小时，于是他尝试卡常数，卡着卡着发现时间没多少了，直接去打T1暴力和T3暴力，结果暴力还打挂了，最后尝试把T2两个暴力拼一下，看一下第二个矩阵乘法能不能拿分，结果拼错了，最后没改成功就爆零了。出考场冷静了一下发现状态是可以做到3个的……”</p>
+<p>&emsp;但这毕竟是他的一番说辞，说到底就是他太弱了，他太颓了。</p>
+<p>以上内容——2019.3.7</p>
+<p>&emsp;后来我又问他，那你Day2为什么不能翻盘呢？</p>
+<p>&emsp;他笑着，却又有些郑重地说道：“水平不够啊。”</p>
+<p>&emsp;鉴于我的好奇，在重重追问下，他勉为其难地告诉我：“其实当时我就没想着翻盘，倒是心态也挺好，开场还是发现T2最可做，冷静分析一下发现可以直接上树剖线段树扫描线3个log的做法，当时我想到NOIP之后学DDP学到的一个叫做全局平衡二叉树的东西，那玩意儿可以把2个log的树剖优化成1个log，自己觉得没什么问题，就写完了，这写完还行，拿随机树测了一下，跑得飞快，又觉得不太靠谱，又拿链测，还是跑得飞快……这之后就普普通通地把T1和T3的暴力写了，似乎是会T3的多一些分的暴力，但毕竟不敢去写，T1又没有想到枚举非零元素消。但毕竟还是写了暴力。当时估分200，其实觉得自己不管怎么样都翻不了盘，出来也无所谓了。”</p>
+<p>&emsp;“只是后来出分之后发现自己第二题只有60……教练要来了程序自己测了一下，发现被卡常数了……其实也不是吧，毕竟全局平衡二叉树常数的确是挺大的，据说那个今年全国排名第四，最后被挤到第五无缘国家队的zzy也写了我这个做法，也T飞了。我当时只是奇怪为什么会T，后来我测了一下二叉树，发现的确跑得挺慢的。”</p>
+<p>&emsp;“不过，毕竟就算是200，也翻不了盘啊，就算我Day2是220分标准分，也还差好多分进省队啊。”</p>
+<p>&emsp;“那你怎么邀请赛也不去呀？”我问道。</p>
+<p>&emsp;“申不到啊，水平太低了。如果我day2没挂的话，可能有概率能申到吧……不过，我倒是无所谓了，毕竟后来打了NOI同步赛，大概是铜牌都没拿到，去现场爆蛋感觉总不如VP爆蛋来得不痛不痒。你应该知道的，今年NOI指导直接切了D1T3，进了集训队。有时候觉得吧，当时我和他的差距也才猴子和人一般，没想到现在我像那种毫无生命的无机物了。”</p>
+<p>&emsp;我看着他，心中略有些同情，听说他停了两年课，文化课已经爆蛋了，又没去过NOI，没进过省队，这种自招取消的年头，也不知道他将来流落街头的时候，有没有人会记得，曾经他也是一个拿过省一的竞赛生啊。</p>
 
       
     </div>
@@ -277,13 +302,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/11/13/hihoCoder1252%20Kejin%20Game/hihoCoder1252%20Kejin%20Game/">hihoCoder1252 Kejin Game</a></p>
+        <p><span>本文标题:</span><a href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/">ZJOI2019赛后感</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">emoairx</a></p>
         <p><span>发布时间:</span>2019-11-13, 06:46:48</p>
-        <p><span>最后更新:</span>2018-01-25, 20:18:44</p>
+        <p><span>最后更新:</span>2020-06-18, 22:06:26</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/11/13/hihoCoder1252%20Kejin%20Game/hihoCoder1252%20Kejin%20Game/" title="hihoCoder1252 Kejin Game">http://emoairx.top/2019/11/13/hihoCoder1252%20Kejin%20Game/hihoCoder1252%20Kejin%20Game/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/13/hihoCoder1252%20Kejin%20Game/hihoCoder1252%20Kejin%20Game/　　作者: emoairx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/" title="ZJOI2019赛后感">http://emoairx.top/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E9%80%80%E5%BD%B9%E5%BD%95/　　作者: emoairx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -296,15 +321,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/dsu%20on%20tree/">
-                    dsu on tree
+                <a href="/2020/06/18/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2020%E9%80%80%E5%BD%B9%E5%BD%95/">
+                    滚粗记/ZJOI2020退役录
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2019/11/13/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/">
-                    线性规划与网络流24题
+                <a href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E8%B5%9B%E5%90%8E%E6%84%9F/">
+                    ZJOI2019赛后感
                 </a>
             </div>
         
@@ -316,7 +341,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#题意"><span class="toc-number">1.</span> <span class="toc-text">题意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#题解"><span class="toc-number">2.</span> <span class="toc-text">题解</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#按正论说回忆录得有个开头，但哪些年代久远的，沉浸在记忆里的也早融化了，便也得不到个开头。"><span class="toc-number">1.</span> <span class="toc-text">按正论说回忆录得有个开头，但哪些年代久远的，沉浸在记忆里的也早融化了，便也得不到个开头。</span></a></li></ol>
         
     </div>
     <style>
@@ -352,7 +377,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"hihoCoder1252 Kejin Game　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"ZJOI2019赛后感　| Wzp Ak King　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -394,7 +419,7 @@ new Valine({
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/11/13/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/dsu%20on%20tree/" title="上一篇: dsu on tree">
+            <a href="/2020/06/18/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2020%E9%80%80%E5%BD%B9%E5%BD%95/" title="上一篇: 滚粗记/ZJOI2020退役录">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -402,7 +427,7 @@ new Valine({
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2019/11/13/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/" title="下一篇: 线性规划与网络流24题">
+            <a href="/2019/11/13/%E6%BB%9A%E7%B2%97%E8%AE%B0/ZJOI2019%E8%B5%9B%E5%90%8E%E6%84%9F/" title="下一篇: ZJOI2019赛后感">
                 <i class="fa fa-angle-right"></i>
             </a>
         
