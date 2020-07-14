@@ -157,6 +157,10 @@
                         
                             <li><a href="/tags/">标签云</a></li>
                         
+                            <li><a href="/about/">关于我</a></li>
+                        
+                            <li><a href="/friends/">友链</a></li>
+                        
                         </ul>
                     </nav>
                     <nav class="header-nav">
@@ -228,6 +232,10 @@
                 
                     <li><a href="/tags/">标签云</a></li>
                 
+                    <li><a href="/about/">关于我</a></li>
+                
+                    <li><a href="/friends/">友链</a></li>
+                
                 <div class="clearfix"></div>
                 </ul>
             </nav>
@@ -245,73 +253,6 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
-  
-    <article id="post-线性规划与网络流24题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/11/13/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/" class="article-date">
-      <time datetime="2019-11-12T22:46:47.770Z" itemprop="datePublished">2019-11-13</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/13/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/">线性规划与网络流24题</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>$Loj$上去掉了一题：机器人路径规划问题，所以就不做啦。</p>
-<p><a href="https://loj.ac/problems/search?keyword=%E7%BD%91%E7%BB%9C%E6%B5%81+24+%E9%A2%98" target="_blank" rel="noopener">网络流24(23)题题面</a></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" rel="tag">网络流</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2019/11/13/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
   
     <article id="post-UOJ349 [WC2018]即时战略" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -936,6 +877,77 @@
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li></ul>
     </div>
 
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-codeforces674D" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/11/13/codeforces674D/" class="article-date">
+      <time datetime="2019-11-12T22:46:47.530Z" itemprop="datePublished">2019-11-13</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/13/codeforces674D/">codeforces674D Bearish Fanpages</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><blockquote>
+<p><strong>Description</strong></p>
+<p>一个社交网站有$n$个网页，第ii个公司拥有第$i$个网页，每一个网页有一个父网页，不允许$i$网页是$j$网页的父网页且$j$网页是$i$网页的父网页，也不允许$i$网页是自己的父网页，对于$i$网页，设其父网页是$j0$网页，其子网页为$j1,j2,…,jk$，当用户浏览$i$网页时，他们会看到来自$k+2$家公司$i,j0,j1,…,jk$的广告，有$ti$个用户喜欢第$i$个网页，他们每个人都会点开一个广告看，对于$k+1$家公司$j0,j1,…,jk$，会有$\lfloor \frac{t_{i}}{k+2}\rfloor$个用户点开他们家的广告，对于剩下的$t_{i}-(k+1)\lfloor \frac{t_{i}}{k+2}\rfloor$个用户，他们会点开第$i$家公司的广告。一个公司的总收入等于看他们家广告的用户数量。现在给出第ii个网页的父网页$fi$，有$q$个操作，操作分三种： </p>
+<p>$1 i j$:第$i$个网页的父网页变成$j$，保证之前第$i$个网页的父网页不是$j$。</p>
+<p>$2 i$:查询第$i$家公司的总收入</p>
+<p>$3$:输出这$n$家公司的最少收入和最多收入</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codeforces/" rel="tag">codeforces</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" rel="tag">优先队列</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2019/11/13/codeforces674D/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
