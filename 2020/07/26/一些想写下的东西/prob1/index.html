@@ -15,15 +15,15 @@
 
 
 
-<meta name="description" content="$f_0 = 1\f_n = \sum_{i=0}^{n-1}f_i\n\le10^4$ 考虑使用不完全归纳法。 $f_o=1,f_1=1,f_2=2,f_3=4,f_4=8 … $ 唉，这东西好像就是二的幂次啊，是不是高精度莽一波就没了。">
+<meta name="description" content="$f_0 = 1$ $f_n = \sum_{i=0}^{n-1}f_i$ $n\le10^4$ 考虑使用不完全归纳法。 $f_o=1,f_1=1,f_2=2,f_3=4,f_4=8 … $ 唉，这东西好像就是二的幂次啊，是不是高精度莽一波就没了。">
 <meta name="keywords" content="多项式,递推">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前缀和优化数列递推">
 <meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2020&#x2F;07&#x2F;26&#x2F;%E4%B8%80%E4%BA%9B%E6%83%B3%E5%86%99%E4%B8%8B%E7%9A%84%E4%B8%9C%E8%A5%BF&#x2F;prob1&#x2F;index.html">
 <meta property="og:site_name" content="Wzp Ak King">
-<meta property="og:description" content="$f_0 = 1\f_n = \sum_{i=0}^{n-1}f_i\n\le10^4$ 考虑使用不完全归纳法。 $f_o=1,f_1=1,f_2=2,f_3=4,f_4=8 … $ 唉，这东西好像就是二的幂次啊，是不是高精度莽一波就没了。">
+<meta property="og:description" content="$f_0 = 1$ $f_n = \sum_{i=0}^{n-1}f_i$ $n\le10^4$ 考虑使用不完全归纳法。 $f_o=1,f_1=1,f_2=2,f_3=4,f_4=8 … $ 唉，这东西好像就是二的幂次啊，是不是高精度莽一波就没了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-26T09:16:12.000Z">
+<meta property="og:updated_time" content="2020-07-26T09:41:38.000Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
@@ -228,7 +228,7 @@
   
     <div class="article-meta">
       <a href="/2020/07/26/%E4%B8%80%E4%BA%9B%E6%83%B3%E5%86%99%E4%B8%8B%E7%9A%84%E4%B8%9C%E8%A5%BF/prob1/" class="article-date">
-      <time datetime="2020-07-26T09:16:12.000Z" itemprop="datePublished">2020-07-26</time>
+      <time datetime="2020-07-26T09:41:38.000Z" itemprop="datePublished">2020-07-26</time>
 </a>
 
 
@@ -267,7 +267,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>$f_0 = 1\f_n = \sum_{i=0}^{n-1}f_i\n\le10^4$</p>
+        <p>$f_0 = 1$</p>
+<p>$f_n = \sum_{i=0}^{n-1}f_i$</p>
+<p>$n\le10^4$</p>
 <p><del>考虑使用不完全归纳法。</del></p>
 <p>$f_o=1,f_1=1,f_2=2,f_3=4,f_4=8 … $</p>
 <p><del>唉，这东西好像就是二的幂次啊，是不是高精度莽一波就没了。</del></p>
@@ -279,7 +281,9 @@
 <blockquote>
 <p><code>Alice</code> 有一个多项式</p>
 <p>$$F(x) = \sum_{i=0}^{m}a_ix^i$$</p>
-<p><code>Alice</code> 还有一个递推式<br>$$<br>\begin{aligned}<br>f_0 &amp;= 1 \<br>f_i &amp;= ((b_i \times (\sum_{j=0}^{i-1}f_j \times F(i-j))) \bmod P) ,\operatorname{xor},c_i<br>\end{aligned}<br>$$</p>
+<p><code>Alice</code> 还有一个递推式</p>
+<p>$$f_0 = 1 $$</p>
+<p>$$f_i = ((b_i \times (\sum_{j=0}^{i-1}f_j \times F(i-j))) \bmod P) ,\operatorname{xor},c_i$$</p>
 <p>其中 $P = 10^9 + 7$</p>
 <p>$A ,\operatorname{xor}, B$ 表示 $A$ 与 $B$ 的二进制不进位加法</p>
 <p>其中 $n,m,{a_n},{b_n},{c_n}$ 是已知的。</p>
@@ -308,8 +312,7 @@
 <p>因此我们预处理求出贡献的系数，只需要 $O(m)$ 的时间复杂度就可以将 $f_n*F(x-n)$ 的贡献加入到差分数组中。</p>
 <p>另一种做法是使用下降幂维护。</p>
 <blockquote>
-<p>（先忽略 $b_i$ 和 $c_i$） $$\begin{aligned} f_i&amp;=\sum\limits_{j=0}^{i-1}f_jF(i-j) \ &amp;=\sum\limits_{j=0}^{i-1}f_j\sum\limits_{k=0}^ma_k(i-j)^k \ &amp;=\sum\limits_{j=0}^{i-1}f_j\sum\limits_{k=0}^ma_k\sum\limits_{p=0}^k\begin{Bmatrix}k\p\end{Bmatrix}(i-j)^{\underline p} \ &amp;=\sum\limits_{p=0}^m\sum\limits_{j=0}^{i-1}f_j(i-j)^{\underline p}\sum\limits_{k=0}^ma_k\begin{Bmatrix}k\p\end{Bmatrix} \end{aligned}$$ 令 $B_p=\sum\limits_{k=0}^ma_k\begin{Bmatrix}k\p\end{Bmatrix}$，$s_p=\sum\limits_{j=0}^{i-1}f_j(i-j)^{\underline p}$，则 $f_i=\sum\limits_{p=0}^mB_ps_p$。 当 $i\rightarrow i+1$ 时，考虑如何维护 $s_p$。 结论：$s_p\leftarrow s_p+p\cdot s_{p-1}$ ### 证明方法 1：（用乘法分配律拆开） $$\begin{aligned} (t+1)^{\underline p}&amp;=(t+1-p+p)^{\underline p} \ &amp;=(t+1-p)\cdot t^{\underline {p-1}}+p\cdot t^{\underline {p-1}} \ &amp;=t^{\underline p}+p\cdot t^{\underline {p-1}} \end{aligned}$$ ### 证明方法 2：（下降幂二项式定理） <strong>下降幂二项式定理:</strong> $$(x+y)^{\underline n}=\sum\limits_{i=0}^n\begin{pmatrix}n\i\end{pmatrix}x^{\underline i}y^{\underline {n-i}}$$ 那么： $$\begin{aligned} (t+1)^{\underline p}&amp;=\sum\limits_{i=0}^n\begin{pmatrix}n\i\end{pmatrix}1^{\underline i}p^{\underline {n-i}} \ &amp;=t^{\underline p}+p\cdot t^{\underline {p-1}} \end{aligned}$$ </p>
-<p><strong>注：</strong> 当 $i&gt;1$ 时 $1^{\underline i}=0$。 — 时间复杂度：$\mathcal{O}(nm)$。</p>
+<p><a href="https://www.luogu.com.cn/paste/w35384yw" target="_blank" rel="noopener">https://www.luogu.com.cn/paste/w35384yw</a></p>
 </blockquote>
 <p>容易发现这两种做法本质相同。</p>
 <p>以及另一种不是那么优秀的做法：</p>
@@ -324,7 +327,9 @@
 </blockquote>
 <blockquote>
 <p>$F$ 是一个多项式</p>
-<p><code>Alice</code> 还有一个递推式<br>$$<br>\begin{aligned}f_0 &amp;= 1 \f_i &amp;= \sum_{j=0}^{i-1}f_j \times F(i-j),col_i\ne col_j\end{aligned}<br>$$</p>
+<p><code>Alice</code> 还有一个递推式</p>
+<p>$$f_0 = 1 $$</p>
+<p>$$f_i = \sum_{j=0}^{i-1}f_j \times F(i-j),col_i\ne col_j$$</p>
 <p>其中 $n,m,{col_n}$ 是已知的。</p>
 <p><code>Alice</code> 想知道 $(\sum_{i=1}^{n}f[i]\times i^2) \bmod P$，请你帮助他求出这个值。</p>
 </blockquote>
@@ -333,7 +338,9 @@
 <p><code>Alice</code> 有一个递推式</p>
 <p>给出 $F(0),F(1) .. F(m-1)$</p>
 <p>以及递推关系 $F(n) = \sum_{i=1}^{m} a_i \times F(n-i)$</p>
-<p><code>Alice</code> 还有一个递推式<br>$$<br>\begin{aligned}f_0 &amp;= 1 \f_i &amp;= ((b_i \times (\sum_{j=0}^{i-1}f_j \times F(i-j))) \bmod P) ,\operatorname{xor},c_i\end{aligned}<br>$$</p>
+<p><code>Alice</code> 还有一个递推式</p>
+<p>$$f_0 = 1 $$</p>
+<p>$$f_i = ((b_i \times (\sum_{j=0}^{i-1}f_j \times F(i-j))) \bmod P) ,\operatorname{xor},c_i$$</p>
 <p>其中 $P = 10^9 + 7$</p>
 <p>$A ,\operatorname{xor}, B$ 表示 $A$ 与 $B$ 的二进制不进位加法</p>
 <p>其中 $n,m,{a_n},{b_n},{c_n}$ 是已知的。</p>
@@ -353,7 +360,9 @@
 </blockquote>
 <blockquote>
 <p>$F$ 是一个递推式</p>
-<p><code>Alice</code> 还有一个递推式<br>$$<br>\begin{aligned}f_0 &amp;= 1 \f_i &amp;= \sum_{j=0}^{i-1}f_j \times F(i-j),col_i\ne col_j\end{aligned}<br>$$</p>
+<p><code>Alice</code> 还有一个递推式</p>
+<p>$$f_0 = 1 $$</p>
+<p>$$f_i = \sum_{j=0}^{i-1}f_j \times F(i-j),col_i\ne col_j$$</p>
 <p>其中 $n,m,{col_n}$ 是已知的。</p>
 <p><code>Alice</code> 想知道 $(\sum_{i=1}^{n}f[i]\times i^2) \bmod P$，请你帮助他求出这个值。</p>
 </blockquote>
@@ -373,7 +382,7 @@
         <p><span>本文标题:</span><a href="/2020/07/26/%E4%B8%80%E4%BA%9B%E6%83%B3%E5%86%99%E4%B8%8B%E7%9A%84%E4%B8%9C%E8%A5%BF/prob1/">前缀和优化数列递推</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">emoairx</a></p>
         <p><span>发布时间:</span>2020-07-26, 16:05:01</p>
-        <p><span>最后更新:</span>2020-07-26, 17:16:12</p>
+        <p><span>最后更新:</span>2020-07-26, 17:41:38</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/07/26/%E4%B8%80%E4%BA%9B%E6%83%B3%E5%86%99%E4%B8%8B%E7%9A%84%E4%B8%9C%E8%A5%BF/prob1/" title="前缀和优化数列递推">http://emoairx.top/2020/07/26/%E4%B8%80%E4%BA%9B%E6%83%B3%E5%86%99%E4%B8%8B%E7%9A%84%E4%B8%9C%E8%A5%BF/prob1/</a>
             <span class="copy-path" data-clipboard-text="原文: http://emoairx.top/2020/07/26/%E4%B8%80%E4%BA%9B%E6%83%B3%E5%86%99%E4%B8%8B%E7%9A%84%E4%B8%9C%E8%A5%BF/prob1/　　作者: emoairx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
