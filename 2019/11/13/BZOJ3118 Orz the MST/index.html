@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
@@ -13,10 +15,21 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="author" content="emoairx" />
 
+<script>
+    (function(){
+        if('{{ page.password }}'){
+            if (prompt('请输入密码') !== '{{ page.password }}'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
 
 
 <meta name="description" content="原题戳这里 题意 给你一个图，你可以把一条边边权加或者减若干次，有一定的代价。 问使得其中一些边成为最小生成树之一最小代价是多少。  吐槽​    第一眼以为是BZOJ1937，爆蛋。网上一搜题解全是单纯形法。省选一试0分的菜鸡OI选手怎么可能会单纯形法？然后用了一个从新疆shaoxing第一女选手共产主义接班人何hu梓zhao莹yang里学到的一个有理有据的多项式做法。">
-<meta name="keywords" content="网络流,BZOJ,树,整体二分,分治">
+<meta name="keywords" content="BZOJ,网络流,树,整体二分,分治">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BZOJ3118 Orz the MST">
 <meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;13&#x2F;BZOJ3118%20Orz%20the%20MST&#x2F;index.html">
@@ -82,6 +95,7 @@
 
 
     <script> yiliaConfig.rootUrl = "\/";</script>
+
 
 
 

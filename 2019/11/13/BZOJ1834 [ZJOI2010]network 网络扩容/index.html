@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="zh-Hans">
 <head>
@@ -13,10 +15,21 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="author" content="emoairx" />
 
+<script>
+    (function(){
+        if('{{ page.password }}'){
+            if (prompt('请输入密码') !== '{{ page.password }}'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
 
 
 <meta name="description" content="题面​    http:&#x2F;&#x2F;www.lydsy.com&#x2F;JudgeOnline&#x2F;problem.php?id=1834 题解​    相信网上的题解很多。 ​    只要先跑最大流，再在残留网络上跑费用流就可以了。 贴一下我的代码（SPFA循环队列写成”&amp;lt;”调了好久） ​    用了$Dinic$ ，多路增广$SPFA$。">
-<meta name="keywords" content="网络流,BZOJ">
+<meta name="keywords" content="BZOJ,网络流">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BZOJ1834 [ZJOI2010]network 网络扩容">
 <meta property="og:url" content="http:&#x2F;&#x2F;emoairx.top&#x2F;2019&#x2F;11&#x2F;13&#x2F;BZOJ1834%20[ZJOI2010]network%20%E7%BD%91%E7%BB%9C%E6%89%A9%E5%AE%B9&#x2F;index.html">
@@ -82,6 +95,7 @@
 
 
     <script> yiliaConfig.rootUrl = "\/";</script>
+
 
 
 
